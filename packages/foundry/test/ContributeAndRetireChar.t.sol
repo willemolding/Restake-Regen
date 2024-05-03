@@ -22,7 +22,7 @@ contract ContributeTest is Test {
         vm.selectFork(baseSepoliaFork);
         assertEq(vm.activeFork(), baseSepoliaFork);
 
-        FundingPool fundingPool = new FundingPool(CHAR_TOKEN);
+        FundingPool fundingPool = new FundingPool(CHAR_TOKEN, address(0), address(0), 0);
 
         // get some CHAR from the faucet
         IFaucet(CHAR_FAUCET).withdraw(CHAR_TOKEN, 5 ether);

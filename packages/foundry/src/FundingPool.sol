@@ -5,6 +5,7 @@ import "@toucanprotocol/contracts/pools/Biochar.sol";
 import "@toucanprotocol/contracts/interfaces/IToucanCarbonOffsets.sol";
 
 import {Client} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol";
+import {IRouterClient} from "@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IRouterClient.sol";
 
 interface IERC20 {
     function approve(address spender, uint256 amount) external returns (bool);
@@ -21,14 +22,21 @@ contract FundingPool {
     uint256 public constant EPOCH_SECONDS = 2419200;
    
     Biochar public charToken;
-
+    address public ccipRouter;
+    address public challengeReceiver;
+    uint64 public destinationChain;
 
     // stores the contributions made for a given epoch by a given contributor
     // contributor => epoch => value
     mapping(address => mapping(uint256 => uint256)) public contributions;
 
-    constructor(address _tokenAddress) {
+    error NotEnoughBalance(uint256 currentBalance, uint256 calculatedFees); // Used to make sure contract has enough balance.
+
+    constructor(address _tokenAddress, address _ccipRouter, address _challengeReceiver, uint64 _destinationChain) {
         charToken = Biochar(_tokenAddress);
+        ccipRouter = _ccipRouter;
+        challengeReceiver = _challengeReceiver;
+        destinationChain = _destinationChain;
     }
 
     //////////////////////////////////
@@ -62,8 +70,32 @@ contract FundingPool {
         }
     }
 
-    function challenge() external {
 
+    function challenge() external returns (bytes32) {
+        Client.EVM2AnyMessage memory message = Client.EVM2AnyMessage({
+            receiver: abi.encode(challengeReceiver),
+            data: abi.encode("hi"),
+            tokenAmounts: new Client.EVMTokenAmount[](0),
+            extraArgs: Client._argsToBytes(
+                // Additional arguments, setting gas limit
+                Client.EVMExtraArgsV1({gasLimit: 200_000})
+            ),
+            feeToken: address(0) // pay fees with native token
+        });
+
+        IRouterClient router = IRouterClient(ccipRouter);
+
+        // Get the fee required to send the CCIP message
+        uint256 fees = router.getFee(destinationChain, message);
+
+        if (fees > address(this).balance)
+            revert NotEnoughBalance(address(this).balance, fees);
+
+        // Send the CCIP message through the router and store the returned CCIP message ID
+        return router.ccipSend{value: fees}(
+            destinationChain,
+            message
+        );
     }
 
     //////////////////////////////////
