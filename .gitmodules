@@ -7,3 +7,6 @@
 [submodule "packages/foundry/lib/solidity-bytes-utils"]
 	path = packages/foundry/lib/solidity-bytes-utils
 	url = https://github.com/gnsps/solidity-bytes-utils
+[submodule "packages/foundry/lib/contracts"]
+	path = packages/foundry/lib/contracts
+	url = https://github.com/ToucanProtocol/contracts
