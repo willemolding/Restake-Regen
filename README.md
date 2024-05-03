@@ -9,7 +9,7 @@
 
 Protocols like Celo [can claim to be carbon neutral](https://blog.celo.org/a-carbon-negative-blockchain-its-here-and-it-s-celo-60228de36490) because the protocol itself takes a small cut of every block rewards which goes to a carbon offset fund.
 
-Adding this to Ethereum is impossible without a hard-fork however we can get a similar result using Eigenlayer restaking and slashing mechanisms by defining an AVS (Actively Validated Service) that enforces their commitment to subsidising the energy usage of running a node by retiring high quality[ Toucan Biochar (CHAR) carbon credits](https://app.toucan.earth/) on BASE.
+Adding this to Ethereum is impossible without a hard-fork however we can get a similar result using Eigenlayer restaking and slashing mechanisms by defining an AVS (Actively Validated Service) that enforces their commitment to subsidising the energy usage of running a node by retiring high quality[ Toucan Biochar (CHAR) carbon credits](https://app.toucan.earth/) on Base L2.
 
 Validators register (opt-in) with the AVS with a self-selected % commitment of the total etherium network (between 0.0001% and 1%) and then each epoch (28 days with 13 months a year per the [International Fixed Calendar](https://en.wikipedia.org/wiki/International_Fixed_Calendar)) they must send the required amount of CHAR to the Restake//Regen Funding Pool contract, which is then offset every 1T accumulated by anyone. The offset amount required is defined by a custom [Chainlink Any API](https://docs.chain.link/any-api/get-request/examples/array-response#example) oracle linked to the [Cambridge Blockchain Network Sustainability Index API]( https://ccaf.io/cbnsi/ethereum/ghg).
 
@@ -17,16 +17,22 @@ Validators register (opt-in) with the AVS with a self-selected % commitment of t
 A validator must contribute CHAR to the Restake//Regen Funding Pool in a block within each epoch, and a recipt of this proof is stored in the funding pool. At any time, anyone (whistleblower) can challenge a validator through the Funding Pool, and claim they didn't make their promised contribution. If the validator did contribute, the receipt is checked and they wont be slashed. If there is no receipt during that epoch, they are slashed by the AVS. 
 
 ## Understanding Ethereum's Carbon Footprint
-The Ethereum network has recently grown past 1,000,000 active validators. Eth network Energy and CO2 is difficult to estimate, however is predicted and distributed by the Cambridge Blockchain Network Sustainability Index (CBNSI) provides live estimates of both energy use and carbon expendature [with a thorough methodology to account for global electricity mixes](https://ccaf.io/cbnsi/ethereum/ghg/methodology).
-Using open source Eth Validator Data from [Bitquery](https://ide.bitquery.io/ETH2-validators-deposits) and the CBNSI Eth CO2 emissions [Data](https://ccaf.io/cbnsi/ethereum/ghg) and [API](https://ccaf.io/cbeci/api/eth/pos/charts/total_greenhouse_gas_emissions/monthly), we calculate a mean annual carbon cost of XXX.
+The Ethereum network has recently grown past 1,000,000 active validators with emissions totalling around 2000T CO2/Yr. Ethereum network Energy and CO2 is difficult to estimate, however is predicted and distributed by the Cambridge Blockchain Network Sustainability Index (CBNSI) provides live estimates of both energy use and carbon expendature [with a thorough methodology to account for global electricity mixes](https://ccaf.io/cbnsi/ethereum/ghg/methodology).
+Using open source Eth Validator Data from [Bitquery](https://ide.bitquery.io/ETH2-validators-deposits) and the CBNSI Eth CO2 emissions [Data](https://ccaf.io/cbnsi/ethereum/ghg) and [API](https://ccaf.io/cbeci/api/eth/pos/charts/total_greenhouse_gas_emissions/monthly).
 
+There is technically no upper maximum to number of validators and can assume that the network energy is going to go up over time.
+However, we can see in Figure 1 that the average Ethereum validator carbon expense has dropped from 0.004TCO2 (4kg CO2) / Validator / Epoch in April 2023, to 0.001TCO2 (~1kg CO2) in April 2024, suggesting that the network is greening over time. 
+These numbers are negigble and we propose that validators may opt-in to 1x,5x,10x, 100x or 1000x of their emissions to help green the network.
+With ~1,111,489 active validators 
 
-
-Bit of carbon math
- 
 ![Emissions per Validator](figures/emissions_per_validator.png)
-
+Figure 1: (a) Total Ethereum Emissions and Validators, (b) Emissions per Validator per Epoch
 Data Sources: 
+
+## Toucan
+Toucan is a well trusted carbon credit cryptocurrecy system based on bridged, real world offsets from Vera and Gold Standard.
+Toucan deployed their high quality [CHAR](https://app.toucan.earth/) credits on Base L2 in March 2024, currently priced at ~$160 USD (May 4, 2024).
+The total Ethereum annual network carbon cost equates to roughly $320,000 per year, or <$0.32c per validator per year or ~2c per validator per epoch .
 
 
 ## System Components
@@ -54,11 +60,6 @@ Allows anyone to call the `contribute` function to gain a receipt of the CHAR to
  - Challenge
  - Retire
  - Retirement Receipts 
-
-### Toucan
-Toucan is a well trusted carbon credit cryptocurrecy system based on bridged real world Carbon Credits from Vera and Gold Standard.
-Toucan recently deployed their high quality CHAR credits, currently priced at ~$160 USD (May 4, 2024).
-The total annual network cost would thus be $320,000 per year, or <$3.20 per validator.
 
 
 ### Worldcoin ID Points System

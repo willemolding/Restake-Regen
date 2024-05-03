@@ -204,7 +204,7 @@ fig.update_yaxes(
     titlefont=dict(color="blue"),
 )
 fig.update_yaxes(
-    title_text="Emissions (Tonnes CO2)",
+    title_text="Emissions (Tonnes CO2 per Year)",
     secondary_y=True,
     row=1,
     col=1,
