@@ -2,7 +2,7 @@ import requests
 import matplotlib.pyplot as plt
 import pandas as pd
 from datetime import datetime, timedelta
-
+import plotly.graph_objects as go
 
 # GET TOTAL NUMBER OF ETH VALIDATORS
 # Thank youuuu https://ide.bitquery.io/ETH2-validators-deposits
@@ -111,7 +111,7 @@ plt.figure(figsize=(10, 5))
 plt.plot(dates, emissions, marker="o", linestyle="-", color="b")
 plt.title("Monthly Ethereum Emissions Over Time")
 plt.xlabel("Date")
-plt.ylabel("Monthly Emissions (tons CO2 equivalent)")
+plt.ylabel("Monthly Emissions (Tonnes CO2)")
 plt.grid(True)
 plt.xticks(rotation=45)
 plt.tight_layout()
@@ -124,6 +124,111 @@ emissions_df = pd.DataFrame(emissions)
 emissions_df["date"] = pd.to_datetime(dates)
 emissions_df = emissions_df.set_index("date")
 
-validators_df["emissions_Tco2"] = emissions_df[0]
+validators_df["emissions_Tco2"] = emissions_df[0] * 1e4  # Kilotonnes to Tonnes
+# Calculate CO2 per validator
+validators_df["CO2_per_validator"] = (
+    (validators_df["emissions_Tco2"] * 12) / 13
+) / validators_df["total_validators"]
+df = validators_df.query("'2022-05-01' <= date <= '2024-04-01'")
 
-df = validators_df
+
+# %%
+import pandas as pd
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+# Assuming your DataFrame df is already defined and includes columns for 'total_validators', 'emissions_Tco2', and 'CO2_per_validator'
+
+# Create subplots: two rows, with shared x-axis, specifying that the first row will have two y-axes
+fig = make_subplots(
+    rows=2,
+    cols=1,
+    shared_xaxes=True,
+    vertical_spacing=0.1,
+    subplot_titles=(
+        "Total Validators and Annual network CO2 Emissions",
+        "CO2 per Validator per 28 day Epoch",
+    ),
+    specs=[[{"secondary_y": True}], [{}]],
+)  # Specifies that the first row has a secondary y-axis
+
+# Add traces to the first subplot
+# Total Validators
+fig.add_trace(
+    go.Scatter(
+        x=df.index,
+        y=df["total_validators"],
+        name="Total Validators",
+        mode="lines+markers",
+        line=dict(color="blue"),
+    ),
+    row=1,
+    col=1,
+    secondary_y=False,
+)
+
+# Emissions trace
+fig.add_trace(
+    go.Scatter(
+        x=df.index,
+        y=df["emissions_Tco2"],
+        name="Emissions (Tons CO2)",
+        mode="lines+markers",
+        line=dict(color="red"),
+    ),
+    row=1,
+    col=1,
+    secondary_y=True,
+)
+
+# Add the CO2 per validator trace to the second subplot
+fig.add_trace(
+    go.Scatter(
+        x=df.index,
+        y=df["CO2_per_validator"],
+        name="CO2 per Validator",
+        mode="lines+markers",
+        line=dict(color="green"),
+    ),
+    row=2,
+    col=1,  # Here secondary_y is False because only one y-axis is needed in the second row
+)
+
+# Update axes properties for the first subplot
+fig.update_yaxes(
+    title_text="Total Validators",
+    secondary_y=False,
+    row=1,
+    col=1,
+    tickfont=dict(color="blue"),
+    titlefont=dict(color="blue"),
+)
+fig.update_yaxes(
+    title_text="Emissions (Tons CO2)",
+    secondary_y=True,
+    row=1,
+    col=1,
+    tickfont=dict(color="red"),
+    titlefont=dict(color="red"),
+)
+
+# Update axes properties for the second subplot
+fig.update_yaxes(
+    title_text="CO2 Emissions per Validator (T)",
+    row=2,
+    col=1,
+    tickfont=dict(color="green"),
+    titlefont=dict(color="green"),
+)
+
+# Update overall layout
+fig.update_layout(height=600, showlegend=True)
+
+# Save plotly figures
+fig.write_image("emissions_per_validator.png")
+
+fig.write_html("emissions_per_validator.html", include_plotlyjs="cdn", full_html=False)
+
+
+# Show plot
+fig.show(renderer="browser")
