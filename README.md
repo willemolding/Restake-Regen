@@ -18,9 +18,12 @@ A validator must contribute in a block within each epoch, and a recipt of this p
 ## Understanding Ethereum's Carbon Footprint
 Ethereum has roughly 1,000,000 active validator running. 
 
-![emissions_per_validator](carbon-workings/figures/emissions_per_validator.png)
+![emissions_per_validator](figures/emissions_per_validator.png)
 
 ## System Components
+
+![network_diagram](figures/network_diagram.excalidraw.svg)
+
 
 ### EigenLayer AVS
 - Basic Setup to run the full Eigenlayer stack
