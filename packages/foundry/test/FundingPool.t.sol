@@ -1,6 +1,8 @@
 pragma solidity >=0.8.0 <0.9.0;
 
 import "forge-std/Test.sol";
+import "forge-std/console.sol";
+
 import "../src/FundingPool.sol";
 import "../src/ChallengeReceiver.sol";
 
@@ -59,19 +61,21 @@ contract ContributeTest is Test {
         fundingPool.retire(tokens, amounts, type(uint256).max);
     }
 
-    // function testChallenge() public {
-    //     // deploy the receiver on L1
-    //     vm.selectFork(sepoliaFork);
-    //     assertEq(vm.activeFork(), sepoliaFork);
+    function testChallenge() public {
+        // deploy the receiver on L1
+        vm.selectFork(sepoliaFork);
+        assertEq(vm.activeFork(), sepoliaFork);
 
-    //     ChallengeReceiver challengeReceiver = new ChallengeReceiver(L1_CCIP_ROUTER);
+        ChallengeReceiver challengeReceiver = new ChallengeReceiver(L1_CCIP_ROUTER);
 
-    //     vm.selectFork(baseSepoliaFork);
-    //     assertEq(vm.activeFork(), baseSepoliaFork);
+        vm.selectFork(baseSepoliaFork);
+        assertEq(vm.activeFork(), baseSepoliaFork);
 
-    //     FundingPool fundingPool = new FundingPool(CHAR_TOKEN, BASE_CCIP_ROUTER, address(challengeReceiver), L1_CHAIN_SELECTOR);
-    //     fundingPool.challenge{value: 1 ether}(address(this), 0);
+        FundingPool fundingPool = new FundingPool(CHAR_TOKEN, BASE_CCIP_ROUTER, address(challengeReceiver), L1_CHAIN_SELECTOR);
+        fundingPool.challenge{value: 1 ether}(address(this), 0);
 
-    //     ccipLocalSimulatorFork.switchChainAndRouteMessage(sepoliaFork);
-    // }
+        console.log("Challenge sent");
+
+        ccipLocalSimulatorFork.switchChainAndRouteMessage(sepoliaFork);
+    }
 }
