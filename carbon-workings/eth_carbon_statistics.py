@@ -172,7 +172,7 @@ fig.add_trace(
     go.Scatter(
         x=df.index,
         y=df["emissions_Tco2"],
-        name="Emissions (Tons CO2)",
+        name="Emissions (Tonnes CO2)",
         mode="lines+markers",
         line=dict(color="red"),
     ),
@@ -204,7 +204,7 @@ fig.update_yaxes(
     titlefont=dict(color="blue"),
 )
 fig.update_yaxes(
-    title_text="Emissions (Tons CO2)",
+    title_text="Emissions (Tonnes CO2)",
     secondary_y=True,
     row=1,
     col=1,
