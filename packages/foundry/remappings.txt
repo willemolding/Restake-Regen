@@ -4,3 +4,6 @@
 @chainlink/contracts-ccip/=lib/ccip/contracts
 @chainlink/local/=lib/chainlink-local
 @eigenlayer-middleware/=lib/eigenlayer-middleware/
+@eigenlayer-contracts/=lib/eigenlayer-contracts/
+@eigenlayer/=lib/eigenlayer-middleware/lib/eigenlayer-contracts/src/
+@eigenlayer-scripts/=lib/eigenlayer-middleware/lib/eigenlayer-contracts/script
