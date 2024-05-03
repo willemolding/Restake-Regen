@@ -138,7 +138,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 # Assuming your DataFrame df is already defined and includes columns for 'total_validators', 'emissions_Tco2', and 'CO2_per_validator'
-
+height_px = 600
 # Create subplots: two rows, with shared x-axis, specifying that the first row will have two y-axes
 fig = make_subplots(
     rows=2,
@@ -222,13 +222,30 @@ fig.update_yaxes(
 )
 
 # Update overall layout
-fig.update_layout(height=600, showlegend=True)
+fig.update_layout(height=height_px, showlegend=True)
+
+fig.update_layout(
+    legend=dict(
+        x=0.5,  # Center the legend horizontally relative to the plot
+        y=-0.1,  # Place the legend below the plot
+        xanchor="center",  # Center the legend horizontally
+        yanchor="top",  # Anchor the top of the legend to the specified `y`
+        borderwidth=1,
+        bordercolor="Black",
+        bgcolor="White",
+        traceorder="normal",
+        orientation="h",  # Horizontal layout of legend items
+    )
+)
+
 
 # Save plotly figures
-fig.write_image("emissions_per_validator.png")
 
-fig.write_html("emissions_per_validator.html", include_plotlyjs="cdn", full_html=False)
-
+width_px = 800
+fig.write_image("figures/emissions_per_validator.png", width=width_px, height=height_px)
+fig.write_html(
+    "figures/emissions_per_validator.html", include_plotlyjs="cdn", full_html=False
+)
 
 # Show plot
 fig.show(renderer="browser")
