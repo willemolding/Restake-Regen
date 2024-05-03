@@ -3,3 +3,4 @@
 @chainlink/contracts/=lib/chainlink/contracts
 @chainlink/contracts-ccip/=lib/ccip/contracts
 @chainlink/local/=lib/chainlink-local
+@eigenlayer-middleware/=lib/eigenlayer-middleware/

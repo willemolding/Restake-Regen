@@ -6,8 +6,13 @@ import "forge-std/console.sol";
 import {Client} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol";
 import {CCIPReceiver} from "@chainlink/contracts-ccip/src/v0.8/ccip/applications/CCIPReceiver.sol";
 
-contract ChallengeReceiver is CCIPReceiver {
-    constructor(address _router) CCIPReceiver(_router) {}
+contract RegenChallengeManager is CCIPReceiver {
+
+    address public serviceManager;
+
+    constructor(address _router, address _serviceManager) CCIPReceiver(_router) {
+        serviceManager = _serviceManager;
+    }
 
     function _ccipReceive(Client.Any2EVMMessage memory message) internal override {
         console.logBytes(message.data);

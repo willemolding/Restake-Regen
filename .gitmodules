@@ -22,3 +22,6 @@
 [submodule "packages/foundry/lib/chainlink-local"]
 	path = packages/foundry/lib/chainlink-local
 	url = https://github.com/smartcontractkit/chainlink-local
+[submodule "packages/foundry/lib/eigenlayer-middleware"]
+	path = packages/foundry/lib/eigenlayer-middleware
+	url = https://github.com/Layr-Labs/eigenlayer-middleware
