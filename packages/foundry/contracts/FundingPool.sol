@@ -2,6 +2,7 @@
 pragma solidity >=0.8.0 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@toucanprotocol/contracts/pools/biochar.sol";
 
 /**
  * @title FundingPool
@@ -34,7 +35,7 @@ contract FundingPool {
     }
 
     function retire() external {
-        
+
     }
 
     function currentEpoch() internal view returns (uint256) {

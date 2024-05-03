@@ -10,3 +10,9 @@
 [submodule "packages/foundry/lib/contracts"]
 	path = packages/foundry/lib/contracts
 	url = https://github.com/ToucanProtocol/contracts
+[submodule "packages/foundry/lib/dynamic-fee-pools"]
+	path = packages/foundry/lib/dynamic-fee-pools
+	url = https://github.com/ToucanProtocol/dynamic-fee-pools
+[submodule "packages/foundry/lib/openzeppelin-contracts-upgradeable"]
+	path = packages/foundry/lib/openzeppelin-contracts-upgradeable
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable

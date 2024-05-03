@@ -1,1 +1,4 @@
 @openzeppelin/contracts/=lib/openzeppelin-contracts/contracts
+@openzeppelin/contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts
+@toucanprotocol/contracts/=lib/contracts/contracts
+@toucanprotocol/dynamic-fee-pools/=lib/dynamic-fee-pools
