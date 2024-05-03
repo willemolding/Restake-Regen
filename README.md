@@ -1,6 +1,7 @@
 # 🌱 Restake//Regen
 
-🧠 An Eigenlayer AVS that allows Ethereum validators to offset their energy usage by committing to buying and retiring carbon credits.
+🧠 An Eigenlayer AVS public good that allows Ethereum validators to pledge their commitment to offset their energy usage and carbon expenses by committing to purchasing and retiring high-quality carbon credits.
+
 
 ## Overview
 
@@ -16,7 +17,7 @@ Validators register (opt-in) with the AVS with a self-selected % commitment of t
 A validator must contribute CHAR to the Restake//Regen Funding Pool in a block within each epoch, and a recipt of this proof is stored in the funding pool. At any time, anyone (whistleblower) can challenge a validator through the Funding Pool, and claim they didn't make their promised contribution. If the validator did contribute, the receipt is checked and they wont be slashed. If there is no receipt during that epoch, they are slashed by the AVS. 
 
 ## Understanding Ethereum's Carbon Footprint
-Ethereum has recently risen past 1,000,000 active validator. Eth network Energy and CO2 is difficult to estimate, however is predicted and distributed by the Cambridge Blockchain Network Sustainability Index (CBNSI) provides live estimates of both energy use and carbon expendature [with a thorough methodology](https://ccaf.io/cbnsi/ethereum/ghg/methodology).
+The Ethereum network has recently grown past 1,000,000 active validators. Eth network Energy and CO2 is difficult to estimate, however is predicted and distributed by the Cambridge Blockchain Network Sustainability Index (CBNSI) provides live estimates of both energy use and carbon expendature [with a thorough methodology to account for global electricity mixes](https://ccaf.io/cbnsi/ethereum/ghg/methodology).
 Using open source Eth Validator Data from [Bitquery](https://ide.bitquery.io/ETH2-validators-deposits) and the CBNSI Eth CO2 emissions [Data](https://ccaf.io/cbnsi/ethereum/ghg) and [API](https://ccaf.io/cbeci/api/eth/pos/charts/total_greenhouse_gas_emissions/monthly), we calculate a mean annual carbon cost of XXX.
 
 

@@ -126,7 +126,7 @@ emissions_df = emissions_df.set_index("date")
 
 validators_df["emissions_Tco2"] = emissions_df[0] * 1e4  # Kilotonnes to Tonnes
 # Calculate CO2 per validator
-validators_df["CO2_per_validator"] = (
+validators_df["CO2_per_validator_per_epoch"] = (
     (validators_df["emissions_Tco2"] * 12) / 13
 ) / validators_df["total_validators"]
 df = validators_df.query("'2022-05-01' <= date <= '2024-04-01'")
@@ -185,7 +185,7 @@ fig.add_trace(
 fig.add_trace(
     go.Scatter(
         x=df.index,
-        y=df["CO2_per_validator"],
+        y=df["CO2_per_validator_per_epoch"],
         name="CO2 per Validator",
         mode="lines+markers",
         line=dict(color="green"),
@@ -214,7 +214,7 @@ fig.update_yaxes(
 
 # Update axes properties for the second subplot
 fig.update_yaxes(
-    title_text="CO2 Emissions per Validator (T)",
+    title_text="CO2 Emissions per Validator (Tonnes per Epoch)",
     row=2,
     col=1,
     tickfont=dict(color="green"),
