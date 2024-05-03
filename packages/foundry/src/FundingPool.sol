@@ -1,8 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
-import "@toucanprotocol/contracts/pools/Biochar.sol";
-import "@toucanprotocol/contracts/interfaces/IToucanCarbonOffsets.sol";
+import {IBiochar} from "./interfaces/IBiochar.sol";
 
 import {Client} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol";
 import {IRouterClient} from "@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IRouterClient.sol";
@@ -21,7 +20,7 @@ interface IERC20 {
 contract FundingPool {
     uint256 public constant EPOCH_SECONDS = 2419200;
    
-    Biochar public charToken;
+    IBiochar public charToken;
     address public ccipRouter;
     address public challengeReceiver;
     uint64 public destinationChain;
@@ -33,7 +32,7 @@ contract FundingPool {
     error NotEnoughBalance(uint256 currentBalance, uint256 calculatedFees); // Used to make sure contract has enough balance.
 
     constructor(address _tokenAddress, address _ccipRouter, address _challengeReceiver, uint64 _destinationChain) {
-        charToken = Biochar(_tokenAddress);
+        charToken = IBiochar(_tokenAddress);
         ccipRouter = _ccipRouter;
         challengeReceiver = _challengeReceiver;
         destinationChain = _destinationChain;
@@ -66,15 +65,16 @@ contract FundingPool {
         charToken.redeemOutMany(tco2s, amounts, maxFee);
         for (uint256 i = 0; i < tco2s.length; i++) {
             IERC20(tco2s[i]).approve(address(this), amounts[i]);
-            IToucanCarbonOffsets(tco2s[i]).burnFrom(address(this), amounts[i]);
+            // TODO: get retirements working
+            // IToucanCarbonOffsets(tco2s[i]).burnFrom(address(this), amounts[i]);
         }
     }
 
 
-    function challenge() external returns (bytes32) {
+    function challenge(address contributor, uint256 epoch) external payable returns (bytes32) {
         Client.EVM2AnyMessage memory message = Client.EVM2AnyMessage({
             receiver: abi.encode(challengeReceiver),
-            data: abi.encode("hi"),
+            data: abi.encode(contributor, epoch, contributions[contributor][epoch]),
             tokenAmounts: new Client.EVMTokenAmount[](0),
             extraArgs: Client._argsToBytes(
                 // Additional arguments, setting gas limit
@@ -92,10 +92,12 @@ contract FundingPool {
             revert NotEnoughBalance(address(this).balance, fees);
 
         // Send the CCIP message through the router and store the returned CCIP message ID
-        return router.ccipSend{value: fees}(
+        bytes32 messageId = router.ccipSend{value: fees}(
             destinationChain,
             message
         );
+
+        return bytes32(messageId);
     }
 
     //////////////////////////////////

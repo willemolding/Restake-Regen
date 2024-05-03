@@ -7,9 +7,6 @@
 [submodule "packages/foundry/lib/solidity-bytes-utils"]
 	path = packages/foundry/lib/solidity-bytes-utils
 	url = https://github.com/gnsps/solidity-bytes-utils
-[submodule "packages/foundry/lib/contracts"]
-	path = packages/foundry/lib/contracts
-	url = https://github.com/ToucanProtocol/contracts
 [submodule "packages/foundry/lib/dynamic-fee-pools"]
 	path = packages/foundry/lib/dynamic-fee-pools
 	url = https://github.com/ToucanProtocol/dynamic-fee-pools
@@ -22,3 +19,6 @@
 [submodule "packages/foundry/lib/ccip"]
 	path = packages/foundry/lib/ccip
 	url = https://github.com/smartcontractkit/ccip
+[submodule "packages/foundry/lib/chainlink-local"]
+	path = packages/foundry/lib/chainlink-local
+	url = https://github.com/smartcontractkit/chainlink-local
