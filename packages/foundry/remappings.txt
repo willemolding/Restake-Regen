@@ -2,3 +2,5 @@
 @openzeppelin/contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts
 @toucanprotocol/contracts/=lib/contracts/contracts
 @toucanprotocol/dynamic-fee-pools/=lib/dynamic-fee-pools
+@chainlink/contracts/=lib/chainlink/contracts
+@chainlink/contracts-ccip/=lib/ccip/contracts
