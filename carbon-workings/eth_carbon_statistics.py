@@ -204,7 +204,7 @@ fig.update_yaxes(
     titlefont=dict(color="blue"),
 )
 fig.update_yaxes(
-    title_text="Emissions (Tonnes CO2 per Year)",
+    title_text="Ethereum Network Emissions<br>(Tonnes CO2 per Year)",
     secondary_y=True,
     row=1,
     col=1,
@@ -214,7 +214,7 @@ fig.update_yaxes(
 
 # Update axes properties for the second subplot
 fig.update_yaxes(
-    title_text="CO2 Emissions per Validator (Tonnes per Epoch)",
+    title_text="CO2 Emissions per Validator<br>(Tonnes CO2 per Epoch)",
     row=2,
     col=1,
     tickfont=dict(color="green"),
