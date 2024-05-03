@@ -1,13 +1,18 @@
 //SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
+import "forge-std/console.sol";
+
 import {IBiochar} from "./interfaces/IBiochar.sol";
+import {IToucanCarbonOffset} from "./interfaces/IToucanCarbonOffset.sol";
+import {CreateRetirementRequestParams} from "./interfaces/CreateRetirementRequestParams.sol";
 
 import {Client} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol";
 import {IRouterClient} from "@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IRouterClient.sol";
 
 interface IERC20 {
     function approve(address spender, uint256 amount) external returns (bool);
+    function balanceOf(address account) external view returns (uint256);
 }
 
 /**
@@ -63,10 +68,29 @@ contract FundingPool {
         uint256 maxFee
     ) external {
         charToken.redeemOutMany(tco2s, amounts, maxFee);
+
+        console.log("CHAR Balance: %d", charToken.balanceOf(address(this)));
+
         for (uint256 i = 0; i < tco2s.length; i++) {
+            console.log("TCO2 Balance: %d", IERC20(tco2s[i]).balanceOf(address(this)));
+
+            // need to approve the escrow to receive the tokens
             IERC20(tco2s[i]).approve(address(this), amounts[i]);
             // TODO: get retirements working
-            // IToucanCarbonOffsets(tco2s[i]).burnFrom(address(this), amounts[i]);
+            IToucanCarbonOffset(tco2s[i]).requestRetirement(
+                CreateRetirementRequestParams({
+                    tokenIds: new uint256[](0),
+                    amount: amounts[i],
+                    retiringEntityString: "",
+                    beneficiary: address(this),
+                    beneficiaryString: "",
+                    retirementMessage: "",
+                    beneficiaryLocation: "",
+                    consumptionCountryCode: "",
+                    consumptionPeriodStart: 0,
+                    consumptionPeriodEnd: 0
+                })
+            );
         }
     }
 
