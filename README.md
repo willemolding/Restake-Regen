@@ -143,6 +143,15 @@ The validator dashboard should easily be run through two shell scripts
 2. `sh run_validator_dashboard.sh`
 
 
+## Screenshots of the App
+
+
+![Pledge Screenshot](https://github.com/willemolding/Restake-Regen/blob/main/assets/screenshots/pledge.png?raw=true)
+![Contribute Screenshot](https://github.com/willemolding/Restake-Regen/blob/main/assets/screenshots/contribute.png?raw=true)
+![Challenge Screenshot](https://github.com/willemolding/Restake-Regen/blob/main/assets/screenshots/challenge.png?raw=true)
+![Retire Screenshot](https://github.com/willemolding/Restake-Regen/blob/main/assets/screenshots/retire.png?raw=true)
+![Validator Dashboard Screenshot](https://github.com/willemolding/Restake-Regen/blob/main/assets/screenshots/validator_dashboard_streamlit.png?raw=true)
+![WorldID](https://github.com/willemolding/Restake-Regen/blob/main/assets/screenshots/world-id.png?raw=true)
 
 
 
