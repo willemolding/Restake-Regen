@@ -1,64 +1,109 @@
-# Restake // Regen
+# 🌱 Restake//Regen
+
+
+An Eigenlayer AVS public good that allows Ethereum validators to pledge their commitment to offset either their own, or a fraction of the network's energy usage and carbon emissions by pledging to purchase and retire high-quality carbon credits.
+
+Developed by Dr. Willem Olding and Dr. Nic Pittman
+
+## 🌏 Overview
+
+ Despite Ethereums move to proof-of-stake (POS) cutting its energy use by over [8000x](https://ethereum.org/en/energy-consumption/), the POS network has a network of over 1 Million lightweight validator nodes running varying hardware, emitting roughly [2,000 Tonnes of CO2 annually across the network](https://ccaf.io/cbnsi/ethereum/ghg). 
+
+Protocols like Celo [can claim to be carbon neutral](https://blog.celo.org/a-carbon-negative-blockchain-its-here-and-it-s-celo-60228de36490) because the protocol itself takes a small cut of every block rewards which goes to a carbon offset fund.
+
+Adding this to Ethereum is impossible without a hard-fork. However, we can get a similar result using [Eigenlayer restaking and slashing mechanisms](https://www.blog.eigenlayer.xyz/ycie/) by defining an AVS (Actively Validated Service) that enforces their pledge to subsidising the energy usage of running a node by retiring high quality [Toucan Biochar (CHAR) carbon credits](https://app.toucan.earth/) on Base L2.
+
+Validators register (opt-in) with the Restake//Regen AVS with a self-selected % pledge of the total etherium network (between 0.0001% and 1%) and then each epoch (28 days with 13 months a year per the [International Fixed Calendar](https://en.wikipedia.org/wiki/International_Fixed_Calendar)) they must send the required amount of CHAR to the Restake//Regen Funding Pool contract, which is then retired every 1T accumulated by anyone using the open function call. The offset amount required is defined by a custom [Chainlink Any API](https://docs.chain.link/any-api/get-request/examples/array-response#example) oracle linked to the [Cambridge Blockchain Network Sustainability Index API]( https://ccaf.io/cbnsi/ethereum/ghg).
+
+A validator must contribute CHAR to the Restake//Regen Funding Pool in a block within each epoch, and a recipt of this proof is stored in the funding pool. After the Epoch, anyone (i.e. a whistleblower) can challenge a validator through the Funding Pool, and claim they didn't make their promised contribution during the specified timeframe. If the validator did contribute, the receipt is checked and they won't be slashed. If there is no receipt during that epoch, they are slashed by the AVS. 
+
+
+## Why Restake//Regen?
+Web3 provides interesting solutions to the climate crisis, starting with the bridging of traditional carbon credits on chain and public good Regenerative Finance (Refi) applications.
+
+There are a number of reasons a validator would want to pledge their carbon neutrality or negativity with Restake//Regen
+
+1. Risk Management: By proactively addressing its carbon footprint, Ethereum can mitigate regulatory, legal, and reputational risks associated with environmental damage.
+2. Differentiation and Competitive Advantage: Keep up the pace in a crowded blockchain ecosystem, to differentiate Ethereum from competitors such as Celo by leading the way in sustainability initiatives.
+3. Meeting Social pressure: Feel good, Meme and Marketing and Alignment with Ethical Values
+4. Long term viability of the Ethereum Network: Ethereums energy usage and emissions are going up over time, even if the network and per validator is becoming more carbon efficient overall.
+5. Cash Flow: Adds market pressure to a new class of on-chain carbon. Furthermore, allows validators to amortise their carbon emission costs monthly rather than a one-off multi-year commitment.
+6. Airdrop farming???
+
+## Understanding Ethereum's Carbon Footprint
+The Ethereum network has recently grown past 1,000,000 active validators with emissions totalling around 2000 Tonnes CO2 / year. The Ethereum network Energy and CO2 is difficult to estimate, however is predicted and distributed by the Cambridge Blockchain Network Sustainability Index (CBNSI), who provide live estimates of both energy use and carbon expendature [with a robust methodology to account for global electricity mixes](https://ccaf.io/cbnsi/ethereum/ghg/methodology).
+
+![Emissions per Validator](figures/emissions_per_validator_singleplot.png)
+Figure 1: Total Ethereum Validators and Carbon Emissions. Data sources of Ethereum Validator Data come from [Bitquery](https://ide.bitquery.io/ETH2-validators-deposits) and the CBNSI Ethereum CO2 emissions from their [data portal](https://ccaf.io/cbnsi/ethereum/ghg) and [API](https://ccaf.io/cbeci/api/eth/pos/charts/total_greenhouse_gas_emissions/monthly). Figure was produced by [eth_carbon_statistics.py](figures/carbon-workings/eth_carbon_statistics.py)
+
+
+Figure 1 shows that the number of validators and overall energy use is not constant over time. There is technically no upper maximum to number of Ethereum validators, thus we can assume that the network energy will continue to go up over time. As such, we require an Oracle to distribute the monthly carbon emissions of Ethereum on chain to Restake//Regen. The average Ethereum validator carbon expense has dropped from 0.004TCO2 (4kg CO2) / Validator / Epoch in April 2023, to 0.001TCO2 (~1kg CO2) in April 2024, suggesting that the network and global energy mix is greening over time.
+
+These numbers are negigble per validator, and we propose that validators may opt-in to 1x 5x, 10x, 100x, 1000x or 10,000x (roughly ~0.0001-1% of the total network) of their emissions to help green the network.
 
 
 
-## Requirements
+## Toucan Carbon Credits
+Toucan is a well trusted carbon credit cryptocurrecy system based on bridged, real world offsets from Vera and Gold Standard carbon registries.
+Toucan deployed their high quality [CHAR](https://app.toucan.earth/) credits on Base L2 in March 2024, currently priced at ~$160 USD (May 4, 2024).
+At todays price, the total Ethereum annual network carbon cost equates to roughly $320,000 per year, or <$0.32c per validator per year or ~2c per validator per 28 day epoch.
 
-Before you begin, you need to install the following tools:
 
-- [Node (>= v18.17)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
-- [Git](https://git-scm.com/downloads)
+## Restake//Regen System Components
 
-## Quickstart
+![Restake-Regen Network Architecture](figures/network_diagram.excalidraw.svg)
 
-To get started with Scaffold-ETH 2, follow the steps below:
+There are three main components to the Restake//Regen AVS. 
+1. Restake//Regen AVS (Ethereum L1)
+2. Chainlink AnyAPI: Oracle for live carbon emissions estimates (Ethereum L1)
+3. Funding Pool (Base L2)
 
-1. Install dependencies if it was skipped in CLI:
+And two main user types:
+1. Validators / Operators
+2. Whistleblowers to call out non-conforming pledges.
 
-```
-cd my-dapp-example
-yarn install
-```
+### EigenLayer AVS
+- Basic Setup to run the full Eigenlayer stack
 
-2. Run a local network in the first terminal:
+### Pledge Registry
+- Sign up to the AVS
+- Opt-in to a specific % of the ethereum network (between 0.0001% and 1%)
 
-```
-yarn chain
-```
+### Service Manager
+A minimal interface to be an Eigenlayer AVS
 
-This command starts a local Ethereum network using Foundry. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `packages/foundry/foundry.toml`.
+### Challenge Manager
+Allows anyone to challenge if an operator has not made their pledged CHAR retirements and allows an operator to cancel a challenge via CCIP. Calls into ServiceManager to perform slashing.
+ - Chainlink AnyAPI connection with the CBNSI Web2 API. 
 
-3. On a second terminal, deploy the test contract:
+### Funding Pool (Base L2)
+ - `Contribute`
+Allows operators to call the `Contribute` function to add CHAR tokens to the Funding Pool, and get a receipt for these CHAR tokens being retired on behalf of a operator. These tokens are pooled before burning (CHAR retirement must be in 1T increments). The Funding Pool then Stores the retirement and allows proofs of this contribution to be sent to L1, as to clear any challenges at a later date
+- `Challenge`
+Allows anyone, such as a whistleblower, to claim that an operator did not make their pledged commitment in a previous epoch, by checking the Retirement Receipts. Invokes the L1 Challenge Manager.
+- `Retire`
+Allows anyone to retire the entire FundingPool CHAR credits (Minimum 1T)
+- `Retirement Receipts`
+Storage of operator contribution receipts, to be used during Challenge acted on L1. 
 
-```
-yarn deploy
-```
+### Chainlink Cross Chain Interoperability (CCIP)
+We use the Chainlink CCIP to send Challenge and Pledge Receipt messages between Ethereum L1 and Base L2. 
 
-This command deploys a test smart contract to the local network. The contract is located in `packages/foundry/contracts` and can be modified to suit your needs. The `yarn deploy` command uses the deploy script located in `packages/foundry/script` to deploy the contract to the network. You can also customize the deploy script.
 
-4. On a third terminal, start your NextJS app:
 
-```
-yarn start
-```
+### Worldcoin ID Points System
+We use Worldcoin Proof of Personhood for sybil restistance to our non-linear points system.
+Restake//Regen AVS stakers receive bonus points on on signup, and rewards over time for their ongoing climate pledge and retirement of CHAR carbon offsets.
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
+### The AVS Slashing flow (from Base Sepolia to Sepolia)
 
-Run smart contract test with `yarn foundry:test`
+1. Base Sepolia
+    - Whistleblower calls contract on Base Sepolia passing epoch and validator/operator address they want to attempt to slash
+    - contract reads from storage the amount that operator deposited for the given epoch
+    - This is sent to the CCIP router with the target address given as our ChallengeManager contract on Sepolia L1
 
-- Edit your smart contract `YourContract.sol` in `packages/foundry/contracts`
-- Edit your frontend homepage at `packages/nextjs/app/page.tsx`. For guidance on [routing](https://nextjs.org/docs/app/building-your-application/routing/defining-routes) and configuring [pages/layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) checkout the Next.js documentation.
-- Edit your deployment scripts in `packages/foundry/script`
+2. Ethereum Sepolia L1
 
-## Documentation
+    - CCIP receiver calls into our slasher contract with the "evidence". `ChallengeManager` contract checks if this constitues a slashable offence (e.g. epoch has ended, amount is less than pledged by validator) and slashes the given validators staked Ethereum if they did not meet their pledge.
 
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
 
-To know more about its features, check out our [website](https://scaffoldeth.io).
-
-## Contributing to Scaffold-ETH 2
-
-We welcome contributions to Scaffold-ETH 2!
-
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
