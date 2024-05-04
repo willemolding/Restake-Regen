@@ -249,3 +249,97 @@ fig.write_html(
 
 # Show plot
 fig.show(renderer="browser")
+
+
+# %%
+
+# Assuming your DataFrame df is already defined and includes columns for 'total_validators', 'emissions_Tco2', and 'CO2_per_validator'
+height_px = 400
+# Create subplots: two rows, with shared x-axis, specifying that the first row will have two y-axes
+fig = make_subplots(
+    rows=1,
+    cols=1,
+    shared_xaxes=True,
+    vertical_spacing=0.1,
+    subplot_titles=(
+        "Total Validators and Annual network CO2 Emissions",
+        "CO2 per Validator per 28 day Epoch",
+    ),
+    specs=[[{"secondary_y": True}]],
+)  # Specifies that the first row has a secondary y-axis
+
+# Add traces to the first subplot
+# Total Validators
+fig.add_trace(
+    go.Scatter(
+        x=df.index,
+        y=df["total_validators"],
+        name="Total Validators",
+        mode="lines+markers",
+        line=dict(color="blue"),
+    ),
+    row=1,
+    col=1,
+    secondary_y=False,
+)
+
+# Emissions trace
+fig.add_trace(
+    go.Scatter(
+        x=df.index,
+        y=df["emissions_Tco2"],
+        name="Emissions (Tonnes CO2)",
+        mode="lines+markers",
+        line=dict(color="red"),
+    ),
+    row=1,
+    col=1,
+    secondary_y=True,
+)
+
+# Update axes properties for the first subplot
+fig.update_yaxes(
+    title_text="Total Validators",
+    secondary_y=False,
+    row=1,
+    col=1,
+    tickfont=dict(color="blue"),
+    titlefont=dict(color="blue"),
+)
+fig.update_yaxes(
+    title_text="Ethereum Network Emissions<br>(Tonnes CO2 per Year)",
+    secondary_y=True,
+    row=1,
+    col=1,
+    tickfont=dict(color="red"),
+    titlefont=dict(color="red"),
+)
+
+# Update overall layout
+fig.update_layout(height=height_px, showlegend=True)
+
+fig.update_layout(
+    legend=dict(
+        x=0.5,  # Center the legend horizontally relative to the plot
+        y=-0.1,  # Place the legend below the plot
+        xanchor="center",  # Center the legend horizontally
+        yanchor="top",  # Anchor the top of the legend to the specified `y`
+        borderwidth=1,
+        bordercolor="Black",
+        bgcolor="White",
+        traceorder="normal",
+        orientation="h",  # Horizontal layout of legend items
+    )
+)
+
+
+# Save plotly figures
+
+width_px = 800
+fig.write_image("figures/emissions_per_validator.png", width=width_px, height=height_px)
+fig.write_html(
+    "figures/emissions_per_validator.html", include_plotlyjs="cdn", full_html=False
+)
+
+# Show plot
+fig.show(renderer="browser")
