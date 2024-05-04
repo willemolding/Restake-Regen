@@ -127,20 +127,21 @@ char_price = col2.slider(
     step=1,
 )
 
-cost_in_char = filtered_data["Monthly Emissions"].iloc[0] * pledge_contribution_decimal
-cost_in_usdc = (
-    filtered_data["Monthly Emissions"].iloc[0]
-    * pledge_contribution_decimal
-    * char_price
-)
-num_validators = 1e6
-
-avg_validator = filtered_data["Monthly Emissions"].iloc[0] / num_validators
-validators_offset = cost_in_char / avg_validator
-
-
 # Check if there is data to display, and show it
 if not filtered_data.empty:
+    cost_in_char = (
+        filtered_data["Monthly Emissions"].iloc[0] * pledge_contribution_decimal
+    )
+    cost_in_usdc = (
+        filtered_data["Monthly Emissions"].iloc[0]
+        * pledge_contribution_decimal
+        * char_price
+    )
+    num_validators = 1e6
+
+    avg_validator = filtered_data["Monthly Emissions"].iloc[0] / num_validators
+    validators_offset = cost_in_char / avg_validator
+
     #    st.write(filtered_data)
     st.write(f"### Total Tonnes CO2 this epoch: {cost_in_char} CHAR")
     st.write(f"### Total Cost this epoch: ${cost_in_usdc} USD")
