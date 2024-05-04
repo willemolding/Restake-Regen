@@ -64,7 +64,11 @@ contract ScaffoldETHDeploy is Script {
         return getChain(block.chainid);
     }
 
-    function findChainName() public returns (string memory) {
+    function findChainName() public returns (string memory)  {
+        if (block.chainid == 84532) {
+            return "baseSepolia";
+        }
+
         uint256 thisChainId = block.chainid;
         string[2][] memory allRpcUrls = vm.rpcUrls();
         for (uint256 i = 0; i < allRpcUrls.length; i++) {
