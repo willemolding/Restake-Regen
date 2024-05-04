@@ -1,11 +1,11 @@
-# 🌱 Restake//Regen
-
+# <img src="assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 70px; height: 70px; vertical-align: middle;"> Restake//Regen
 
 An Eigenlayer AVS public good that allows Ethereum validators to pledge their commitment to offset a fraction of the network's carbon emissions by pledging to purchase and retire high-quality carbon credits.
 
 *Developed by Dr. Willem Olding and Dr. Nic Pittman*
 
-## 🌏 Overview
+
+## Overview
 
 Protocols like Celo [can claim to be carbon neutral](https://blog.celo.org/a-carbon-negative-blockchain-its-here-and-it-s-celo-60228de36490) because the protocol itself takes a small cut of every block rewards which goes to a carbon offset fund.
 
@@ -28,7 +28,7 @@ There are a number of reasons a validator would want to pledge their carbon neut
 3. Meeting Social pressure: Feel good, Meme and Marketing and Alignment with Ethical Values
 4. Long term viability of the Ethereum Network: Ethereum's energy usage and emissions are going up over time, even if the network and per validator are becoming more carbon efficient overall.
 5. Cash Flow: Adds market pressure to a new class of on-chain carbon. Furthermore, allows validators to amortise their carbon emission costs monthly rather than a one-off multi-year commitment.
-6. Airdrop farming???
+6. Airdrop farming through the Sybill Resistant WorldCoin Proof of Personhood
 
 ## Understanding Ethereum's Carbon Footprint
 The Ethereum network has recently grown past 1,000,000 active validators with emissions totalling around 2000 Tonnes CO2 / year. The Ethereum network Energy and CO2 is difficult to estimate, however is predicted and distributed by the Cambridge Blockchain Network Sustainability Index (CBNSI), who provide live estimates of both energy use and carbon expendature [with a robust methodology to account for global electricity mixes](https://ccaf.io/cbnsi/ethereum/ghg/methodology).
@@ -132,5 +132,18 @@ $$NetZeroPoints = SignupBonus+\int_{t_{signup}}^t stake\ out$$
 2. Ethereum Sepolia L1
 
     - CCIP receiver calls into our slasher contract with the "evidence". `ChallengeManager` contract checks if this constitues a slashable offence (e.g. epoch has ended, amount is less than pledged by validator) and slashes the given validators staked Ethereum if they did not meet their pledge.
+
+
+## Running Restake//Regen
+Steps ...
+
+## Running the Validator Dashboard
+The validator dashboard should easily be run through two shell scripts
+1. `sh install_poetry.sh`
+2. `sh run_validator_dashboard.sh`
+
+
+
+
 
 

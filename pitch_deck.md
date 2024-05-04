@@ -3,10 +3,10 @@ slideOptions:
   transition: slide
 ---
 
-# 🌱 Restake//Regen
+# <img src="https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 100px; height: 100px; vertical-align: middle;"> Restake//Regen
 
 
-An Eigenlayer AVS public good that allows Ethereum validators to pledge their commitment to offset a fraction of the network's carbon emissions by pledging to purchase and retire high-quality carbon credits.
+An Eigenlayer AVS that allows Ethereum validators to pledge and be held accountable to their commitment to offset a fraction of the network's carbon emissions.
 
 <br>
 
@@ -15,54 +15,40 @@ An Eigenlayer AVS public good that allows Ethereum validators to pledge their co
 
 ---
 
-### 🌏 Overview 1
+### <img src="https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 100px; height: 100px; vertical-align: middle;"> Overview 1
 
 Protocols like Celo [can claim to be carbon neutral](https://blog.celo.org/a-carbon-negative-blockchain-its-here-and-it-s-celo-60228de36490) because the protocol itself takes a small cut of every block rewards which goes to a carbon offset fund.
 
 ---
 
-### 🌏 Overview 2
+### <img src="https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 100px; height: 100px; vertical-align: middle;"> Overview 2
 
 Ethereum's move to proof-of-stake (POS) cut its energy use by over [8000x](https://ethereum.org/en/energy-consumption/), however the POS network has a network of over 1 Million lightweight validator nodes running various hardware, emitting roughly [2,000 Tonnes of CO2 annually across the network](https://ccaf.io/cbnsi/ethereum/ghg). 
 
 ---
 
-### 🌏 Overview 3
+### <img src="https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 100px; height: 100px; vertical-align: middle;"> Overview 3
 
 We can implement carbon offsetting on Ethereum using [Eigenlayer restaking and slashing mechanisms](https://www.blog.eigenlayer.xyz/ycie/) by defining an AVS (Actively Validated Service) that enforces opterators to pledge to subsidise their carbon emissions from running a node by retiring high quality [Toucan Biochar (CHAR) carbon credits](https://app.toucan.earth/) on Base L2.
-
----
-
-### Why Restake//Regen?
-
-Validators have compelling reasons to pledge towards carbon neutrality or even negativity, including:
-1. Risk Management
-2. Cash Flow: Allows validators to amortise their carbon emission costs monthly rather than a one-off multi-year commitment.
-3. Differentiation and Competitive Advantage
-4. Meeting Social pressure and personal ethics
-5. Long term viability of the Ethereum Network
-7. Airdrop Farming
 
 ---
 
 ### Ethereum's Carbon Footprint
 ![emissions_and_validators](https://github.com/willemolding/Restake-Regen/blob/main/assets/figures/emissions_per_validator_singleplot.png?raw=true)
 
-The number of validators and overall energy use is not constant over time and we can assume that the network carbon output will continue to go up in the future due to no maximum validator cap. 
+The number of validators and overall energy use is not constant over time and we can assume that the network carbon output will continue to grow in the future as the number of validators increases. 
 
 ---
 
 ![emissions_per_validator](https://github.com/willemolding/Restake-Regen/blob/main/assets/figures/emissions_per_validator_epoch.png?raw=true)
 
-We use a Chainlink AnyAPI Oracle to distribute monthly carbon emissions of Ethereum on chain to Restake//Regen.
-
-Single validator carbon emissions have dropped from ~4kg CO2 / validator / epoch in April 2023, to ~1kg CO2 in April 2024
-
-Showing the network and global energy mix is greening over time.
+We use a Chainlink AnyAPI Oracle adapt the TC02 required each epoch so that % offset remains constant
 
 ---
 
 These offset numbers are negligable per validator, and we propose that operators may opt-in to 1x, 5x, 10x, 100x, 1000x or 10,000x (roughly ~0.0001-1% of the total network) of their emissions to help green the network.
+
+[SCREENSHOT]
 
 ---
 
@@ -79,15 +65,6 @@ At todays price, the total Ethereum annual network carbon cost equates to:
 
 ![Restake-Regen Network Architecture](https://github.com/willemolding/Restake-Regen/blob/main/assets/figures/network_diagram.excalidraw.svg?raw=True)
 
----
-
-*DELETE*
-There are three main components to the Restake//Regen AVS: 
-1. Restake//Regen AVS (Ethereum L1)
-2. Chainlink AnyAPI Oracle: Provides live carbon emissions estimates (Ethereum L1)
-3. Funding Pool (Base L2)
-
----
 
 ### Chainlink Cross Chain Interoperability (CCIP)
 We use the Chainlink CCIP to send Challenge and Pledge receipt messages between Ethereum L1 and Base L2. 
@@ -98,18 +75,15 @@ We use the Chainlink CCIP to send Challenge and Pledge receipt messages between 
 We use Worldcoin Proof of Personhood for Sybil restistance to our non-linear Net Zero Points system.
 
 
-$$NetZeroPoints = SignupBonus+\int_{t_{signup}}^t stake\ out$$
-
+$$\textrm{NetZeroPoints} = \textrm{SignupBonus}+\int_{t_{signup}}^t \textrm{stake out}$$
 
 ---
 
+![Restake-Regen Operator Flow](https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/figures/operator_flow_diagram.excalidraw.svg)
 
-### The AVS Slashing flow (from Base Sepolia to Sepolia)
+---
 
-1. Whistleblower calls contract on Base Sepolia passing epoch and operator address they want to attempt to slash
-2. contract reads from storage the amount that operator deposited for the given epoch.
-3. This is sent to the CCIP router with the target address given as our ChallengeManager contract on Sepolia L1
-4. CCIP receiver calls into our L1 slasher contract with the "evidence". `ChallengeManager` contract checks if this constitutes a slashable offence (e.g. epoch has ended, amount is less than pledged by validator) and slashes the given validators staked Ethereum if they did not meet their pledge.
+![Restake-Regen Whistleblower Flow](https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/figures/whistleblower_flow_diagram.excalidraw.svg)
 
 ---
 
@@ -118,6 +92,42 @@ $$NetZeroPoints = SignupBonus+\int_{t_{signup}}^t stake\ out$$
 Restake//Regen is an AVS which allows operators to sign up to pledge their commitment to a particular fraction of the total network carbon emissions.
 
 Toucan CHAR is the high quality credit of choice, and we hope to eventually offset the entire 2,000T CO2 of annual Ethereum carbon emissions.
+
+---
+
+---
+
+### Why Restake//Regen?
+
+Validators have compelling reasons to pledge towards carbon neutrality or even negativity, including:
+1. Risk Management
+2. Cash Flow: Allows validators to amortise their carbon emission costs monthly rather than a one-off multi-year commitment.
+3. Differentiation and Competitive Advantage
+4. Meeting Social pressure and personal ethics
+5. Long term viability of the Ethereum Network
+7. Airdrop Farming
+
+---
+
+There are three main components to the Restake//Regen AVS: 
+1. Restake//Regen AVS (Ethereum L1)
+2. Chainlink AnyAPI Oracle: Provides live carbon emissions estimates (Ethereum L1)
+3. Funding Pool (Base L2)
+
+---
+
+
+#### AVS Slashing flow (from Base L2 Sepolia to L1 Sepolia)
+
+1. Whistleblower calls Funding Pool `Challenge` contract on Base passing epoch and operator address they want to attempt to slash.
+2. Contract reads contribution receipt from storage the amount that operator deposited for the given epoch.
+
+---
+
+#### AVS Slashing flow 2
+
+3. Contribution Receipt is sent to the CCIP router with the target address given as our `ChallengeManager` contract on L1.
+4. CCIP receiver calls into our L1 slasher contract with "evidence". `ChallengeManager` contract checks if this constitutes a slashable offence (e.g. epoch has ended, amount is less than pledged by validator) and slashes the given validators staked Ethereum if they did not meet their pledge.
 
 
 ---
@@ -145,7 +155,7 @@ A minimal interface to be an Eigenlayer AVS
 ### Challenge Manager
 Allows anyone to challenge if an operator has not made their pledged CHAR retirements and allows an operator to cancel a challenge via CCIP. Calls into ServiceManager to perform slashing.
  - Currently using a constant 2000T CO2/yr, but
- - Hope to use Chainlink AnyAPI connection with the CBNSI Web2 API. 
+ - Aim to use Chainlink AnyAPI connection with the CBNSI Web2 API. 
 
 ---
 

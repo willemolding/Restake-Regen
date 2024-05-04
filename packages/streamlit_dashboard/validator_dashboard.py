@@ -59,9 +59,9 @@ st.set_page_config(
 )
 
 # Display the logo at the top of the page
-st.image("assets/noun_art/head-earth_noun_logo.png", width=100)
+# st.image("assets/noun_art/head-earth_noun_logo.png", width=100)
 # CSS to inject custom fonts
-font_url = "assets/noun_art/Londrina_Solid/LondrinaSolid-Regular.ttf"
+font_url = "assets/noun_art/Figtree/static/Figtree-Light.ttf"
 css = f"""
 <style>
 @font-face {{
@@ -73,13 +73,31 @@ html, body, h1, h2, h3, h4, h5, h6, .stButton>button {{
 }}
 </style>
 """
-st.markdown(css, unsafe_allow_html=True)
+# st.markdown(css, unsafe_allow_html=True)
 
 
 # %% Start FE
 
+# CSS to hide the link icon
+hide_link_icon = """
+<style>
+    .markdown img[src*='https://raw.githubusercontent.com'] + div {
+        display: none;
+    }
+</style>
+"""
 
-st.write("## Restake//Regen Validator Dashboard")
+html_content = """
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 70px; height: 70px; margin-right: 10px;">
+    <h2 style="margin: 0;">Restake//Regen Validator Dashboard</h2>
+</div>
+"""
+
+# Inject CSS and the HTML content
+st.markdown(hide_link_icon, unsafe_allow_html=True)
+st.markdown(html_content, unsafe_allow_html=True)
+# st.write("## Restake//Regen Validator Dashboard")
 
 col1, col2 = st.columns(2)
 report_month_str = col1.radio("", month_abbr, index=this_month - 2, horizontal=True)
