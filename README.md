@@ -1,5 +1,8 @@
 # <img src="assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 70px; height: 70px; vertical-align: middle;"> Restake//Regen
 
+![emissions_per_validator](assets/cover_art.png?raw=true)
+
+
 An Eigenlayer AVS public good that allows Ethereum validators to pledge their commitment to offset a fraction of the network's carbon emissions by pledging to purchase and retire high-quality carbon credits.
 
 *Developed by Dr. Willem Olding and Dr. Nic Pittman*
@@ -77,7 +80,7 @@ And two main user types:
 
 ### Workflow
 ![Restake-Regen Operator Flow](assets/figures/operator_flow_diagram.excalidraw.svg)
-
+Figure 4: 
 ![Restake-Regen Whistleblower Flow](assets/figures/whistleblower_flow_diagram.excalidraw.svg)
 
 
@@ -153,6 +156,11 @@ The validator dashboard should easily be run through two shell scripts
 ![Validator Dashboard Screenshot](https://github.com/willemolding/Restake-Regen/blob/main/assets/screenshots/validator_dashboard_streamlit.png?raw=true)
 ![WorldID](https://github.com/willemolding/Restake-Regen/blob/main/assets/screenshots/world-id.png?raw=true)
 
+
+
+Cambridge Blockchain Ethereum Carbon Estimates
+
+![sustainability_index](assets/screenshots/cambridge_sustainability_index.png)
 
 
 
