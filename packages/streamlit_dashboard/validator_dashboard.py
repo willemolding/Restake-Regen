@@ -59,21 +59,6 @@ st.set_page_config(
 )
 
 # Display the logo at the top of the page
-# st.image("assets/noun_art/head-earth_noun_logo.png", width=100)
-# CSS to inject custom fonts
-font_url = "assets/noun_art/Figtree/static/Figtree-Light.ttf"
-css = f"""
-<style>
-@font-face {{
-    font-family: 'CustomFont';
-    src: url({font_url}) format('woff');
-}}
-html, body, h1, h2, h3, h4, h5, h6, .stButton>button {{
-    font-family: 'CustomFont';
-}}
-</style>
-"""
-# st.markdown(css, unsafe_allow_html=True)
 
 
 # %% Start FE
@@ -113,10 +98,13 @@ filtered_data = filtered_data[filtered_data["Date"].dt.month == report_month]
 
 
 col1, col2 = st.columns(2)
-pledge_contribution_decimal = col1.selectbox(
-    "Choose your contribution level (% of Ethereum Network):",
-    options=[1, 0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001],
-    index=4,
+pledge_contribution_decimal = (
+    col1.selectbox(
+        "Choose your contribution level (% of Ethereum Network):",
+        options=[100, 50, 20, 5, 2, 1, 0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001],
+        index=5,
+    )
+    / 100
 )
 
 char_price = col2.slider(
@@ -127,20 +115,21 @@ char_price = col2.slider(
     step=1,
 )
 
-cost_in_char = filtered_data["Monthly Emissions"].iloc[0] * pledge_contribution_decimal
-cost_in_usdc = (
-    filtered_data["Monthly Emissions"].iloc[0]
-    * pledge_contribution_decimal
-    * char_price
-)
-num_validators = 1e6
-
-avg_validator = filtered_data["Monthly Emissions"].iloc[0] / num_validators
-validators_offset = cost_in_char / avg_validator
-
-
 # Check if there is data to display, and show it
 if not filtered_data.empty:
+    cost_in_char = (
+        filtered_data["Monthly Emissions"].iloc[0] * pledge_contribution_decimal
+    )
+    cost_in_usdc = (
+        filtered_data["Monthly Emissions"].iloc[0]
+        * pledge_contribution_decimal
+        * char_price
+    )
+    num_validators = 1e6
+
+    avg_validator = filtered_data["Monthly Emissions"].iloc[0] / num_validators
+    validators_offset = cost_in_char / avg_validator
+
     #    st.write(filtered_data)
     st.write(f"### Total Tonnes CO2 this epoch: {cost_in_char} CHAR")
     st.write(f"### Total Cost this epoch: ${cost_in_usdc} USD")
