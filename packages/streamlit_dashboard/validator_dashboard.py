@@ -59,21 +59,6 @@ st.set_page_config(
 )
 
 # Display the logo at the top of the page
-# st.image("assets/noun_art/head-earth_noun_logo.png", width=100)
-# CSS to inject custom fonts
-font_url = "assets/noun_art/Figtree/static/Figtree-Light.ttf"
-css = f"""
-<style>
-@font-face {{
-    font-family: 'CustomFont';
-    src: url({font_url}) format('woff');
-}}
-html, body, h1, h2, h3, h4, h5, h6, .stButton>button {{
-    font-family: 'CustomFont';
-}}
-</style>
-"""
-# st.markdown(css, unsafe_allow_html=True)
 
 
 # %% Start FE
