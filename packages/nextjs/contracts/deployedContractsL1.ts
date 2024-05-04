@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   11155111: {
     RegenPledgeRegistry: {
-      address: "0x2012795f158d0d1453a9459441a38a67cafdcb82",
+      address: "0x855839aa63e7218b26c01344a83c3b8c4c1924b6",
       abi: [
         {
           type: "constructor",
@@ -90,7 +90,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     RegenChallengeManager: {
-      address: "0x6361e6d782589f94f23c86d26943a8b2b4153ef7",
+      address: "0xb83dbc74d715b1679352016e61b53c2c766f1a2f",
       abi: [
         {
           type: "constructor",
@@ -232,6 +232,44 @@ const deployedContracts = {
           stateMutability: "pure",
         },
         {
+          type: "event",
+          name: "SlashAttemptFailed",
+          inputs: [
+            {
+              name: "operator",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "SlashSuccessful",
+          inputs: [
+            {
+              name: "operator",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+          ],
+          anonymous: false,
+        },
+        {
           type: "error",
           name: "InvalidRouter",
           inputs: [
@@ -246,7 +284,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     RegenServiceManager: {
-      address: "0xf1350320c083d1ef4ad6dc350321fcac81d75b13",
+      address: "0x0f8bd07823b8ceb46025592e852430edc3e07a6c",
       abi: [
         {
           type: "constructor",

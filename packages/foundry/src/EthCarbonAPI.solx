@@ -28,9 +28,6 @@ function requestEmissionsData() public returns (bytes32 requestId) {
     return sendChainlinkRequestTo(oracle, req, fee);
 }
 
-// Not sure if this is valid code below here
-// SPDX-License-Identifier: MIT
-
 contract EthCarbonEmissions is ChainlinkClient {
     using Chainlink for Chainlink.Request;
 

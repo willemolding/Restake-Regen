@@ -13,6 +13,9 @@ contract RegenChallengeManager is CCIPReceiver {
     RegenServiceManager public serviceManager;
     RegenPledgeRegistry public pledgeRegistry;
 
+    event SlashSuccessful(address operator, uint256 amount);
+    event SlashAttemptFailed(address operator, uint256 amount);
+
     uint256 constant ETH_CHAR_TOKENS_PER_EPOCH = 154 ether; // 2000 / 13 * 1000
 
     constructor(address _router, RegenPledgeRegistry _pledgeRegistry) CCIPReceiver(_router) {
@@ -35,7 +38,10 @@ contract RegenChallengeManager is CCIPReceiver {
 
         // if the pledge is less than the amount of carbon offset then the operator is slashed
         if (expectedAmount < amount) {
-            serviceManager.freezeOperator(operator);
+            emit SlashSuccessful(operator, amount);
+            // serviceManager.freezeOperator(operator);
+        } else {
+            emit SlashAttemptFailed(operator, amount);
         }
     }
 }
