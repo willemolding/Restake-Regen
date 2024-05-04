@@ -5,6 +5,7 @@ import "forge-std/console.sol";
 
 import "../src/FundingPool.sol";
 import "../src/RegenChallengeManager.sol";
+import "../src/RegenPledgeRegistry.sol";
 
 import {CCIPLocalSimulatorFork} from "@chainlink/local/src/ccip/CCIPLocalSimulatorFork.sol";
 
@@ -66,7 +67,8 @@ contract ContributeTest is Test {
         vm.selectFork(sepoliaFork);
         assertEq(vm.activeFork(), sepoliaFork);
 
-        RegenChallengeManager RegenchallengeManager = new RegenChallengeManager(L1_CCIP_ROUTER);
+        RegenPledgeRegistry pledgeRegistry = new RegenPledgeRegistry();
+        RegenChallengeManager RegenchallengeManager = new RegenChallengeManager(L1_CCIP_ROUTER, pledgeRegistry);
 
         vm.selectFork(baseSepoliaFork);
         assertEq(vm.activeFork(), baseSepoliaFork);
@@ -77,5 +79,13 @@ contract ContributeTest is Test {
         console.log("Challenge sent");
 
         ccipLocalSimulatorFork.switchChainAndRouteMessage(sepoliaFork);
+    }
+
+    function testPledgeMetChallengeFails() public {
+        // show how if a registered pledger has made their pledge then the challenge will fail
+    }
+
+    function testCannotChallengeDuringEpoch() public {
+        // show how if a challenge is made in the current epoch it will fail
     }
 }

@@ -25,7 +25,7 @@ contract RegenServiceManager is ServiceManagerBase {
         ServiceManagerBase(
             _avsDirectory,
             IPaymentCoordinator(address(0)), // restake-regen doesn't need to deal with payments
-            _registryCoordinator,
+            IRegistryCoordinator(address(0)), // we have our own registry
             _stakeRegistry
         )
     {

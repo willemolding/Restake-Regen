@@ -51,13 +51,13 @@ contract FundingPool {
     function contribute(
         address _from,
         uint256 _value,
-        address _contributor
+        address _operator
     ) external {
         require(
             charToken.transferFrom(_from, address(this), _value),
             "Transfer failed"
         );
-        contributions[_contributor][currentEpoch()] += _value;
+        contributions[_operator][currentEpoch()] += _value;
     }
 
     /// @notice Exchanges all CHAR tokens currently in the pool for tCO2 and then retires them
@@ -95,10 +95,10 @@ contract FundingPool {
     }
 
 
-    function challenge(address contributor, uint256 epoch) external payable returns (bytes32) {
+    function challenge(address operator, uint256 epoch) external payable returns (bytes32) {
         Client.EVM2AnyMessage memory message = Client.EVM2AnyMessage({
             receiver: abi.encode(challengeReceiver),
-            data: abi.encode(contributor, epoch, contributions[contributor][epoch]),
+            data: abi.encode(operator, epoch, contributions[operator][epoch]),
             tokenAmounts: new Client.EVMTokenAmount[](0),
             extraArgs: Client._argsToBytes(
                 // Additional arguments, setting gas limit
