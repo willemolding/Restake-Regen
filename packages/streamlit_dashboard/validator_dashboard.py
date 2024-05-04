@@ -61,7 +61,7 @@ st.set_page_config(
 # Display the logo at the top of the page
 st.image("assets/noun_art/head-earth_noun_logo.png", width=100)
 # CSS to inject custom fonts
-font_url = "assets/noun_art/Londrina_Solid/LondrinaSolid-Regular.ttf"
+font_url = "assets/noun_art/Figtree/static/Figtree-Light.ttf"
 css = f"""
 <style>
 @font-face {{
@@ -73,7 +73,7 @@ html, body, h1, h2, h3, h4, h5, h6, .stButton>button {{
 }}
 </style>
 """
-st.markdown(css, unsafe_allow_html=True)
+# st.markdown(css, unsafe_allow_html=True)
 
 
 # %% Start FE
