@@ -43,8 +43,11 @@ These numbers are negligible per validator, and we propose that validators may o
 
 
 ## Toucan Carbon Credits
-Toucan is a well trusted carbon credit cryptocurrency system based on bridged, real world offsets from Vera and Gold Standard carbon registries.
+Toucan is a well trusted carbon credit cryptocurrency system based on bridged, real world offsets and transparent projects from Vera and Gold Standard carbon registries.
 Toucan deployed their high quality [CHAR](https://app.toucan.earth/) credits on Base L2 in March 2024, currently priced at ~$160 USD (May 4, 2024).
+
+![Toucan CHAR projects](assets/Toucan_CHAR_image.png)
+
 At todays price, the total Ethereum annual network carbon cost equates to roughly $320,000 USD per year, or <$0.32 per validator per year or ~2c per validator per 28 day epoch.
 
 
