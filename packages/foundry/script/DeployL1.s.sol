@@ -66,8 +66,13 @@ contract DeployL1 is ScaffoldETHDeploy {
     function _deployRestakeRegenContracts() internal {
 
         RegenPledgeRegistry regenPledgeRegistry = new RegenPledgeRegistry();
+        deployments.push(ScaffoldETHDeploy.Deployment("RegenPledgeRegistry", address(regenPledgeRegistry)));
+
         RegenChallengeManager regenChallengeManager = new RegenChallengeManager(L1_CCIP_ROUTER, regenPledgeRegistry);
+        deployments.push(ScaffoldETHDeploy.Deployment("RegenChallengeManager", address(regenChallengeManager)));
+
         RegenServiceManager regenServiceManager = new RegenServiceManager(regenChallengeManager);
+        deployments.push(ScaffoldETHDeploy.Deployment("RegenServiceManager", address(regenServiceManager)));
         regenChallengeManager.initialize(address(regenServiceManager));
 
 

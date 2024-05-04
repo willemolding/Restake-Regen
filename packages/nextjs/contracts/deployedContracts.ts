@@ -5,9 +5,9 @@
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
-  11155111: {
+  31337: {
     "RegenPledgeRegistry.0.8.12": {
-      address: "0xe52b7443722988d63361cda5d988c80a292e8b3d",
+      address: "0x07cb31640ca711a377c8c5c0a9919bc58c6e77cf",
       abi: [
         {
           type: "function",
@@ -60,7 +60,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     RegenChallengeManager: {
-      address: "0xe3500f88b87bc9e0944b36bfec6af72f4e0f5c41",
+      address: "0x5f90669c96a44a3510183d9a78f05beae4f85ab3",
       abi: [
         {
           type: "constructor",
@@ -216,7 +216,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     RegenServiceManager: {
-      address: "0xdf1ca72863cff0ba6b844a55f45057c12d0b923b",
+      address: "0xd00f0d900c50550c8c19483d1a6d62b3886b8ff9",
       abi: [
         {
           type: "constructor",
