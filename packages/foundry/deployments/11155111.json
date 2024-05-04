@@ -1,6 +1,6 @@
 {
-  "0x06034797b945590e038928249f2ac805c4f43D78": "RegenChallengeManager",
-  "0x9dA3E866c6b9edE493A209069575AB8b6C4FC549": "RegenServiceManager",
-  "0xeb5B8C5699669A1645F94B921a9Fcb81c32406ec": "RegenPledgeRegistry",
+  "0x2012795F158D0D1453a9459441A38a67CafdCB82": "RegenPledgeRegistry",
+  "0x6361E6D782589f94F23C86D26943A8b2b4153ef7": "RegenChallengeManager",
+  "0xF1350320C083D1EF4AD6Dc350321fcAC81D75b13": "RegenServiceManager",
   "networkName": "Sepolia"
 }

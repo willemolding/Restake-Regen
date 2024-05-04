@@ -25,7 +25,7 @@ export const RetireForm = () => {
       <label className="block text-sm font-medium">Project Token (defaults to oldest in pool)</label>
       <AddressInput value={projectToken} onChange={value => setProjectToken(value)} />
       <label className="block text-sm font-medium">Amount</label>
-      <IntegerInput value={amount} onChange={value => setAmount(value as bigint)} />
+      <IntegerInput value={amount} onChange={value => setAmount(BigInt(value))} />
       <button className="btn btn-sm btn-primary" onClick={submitTransaction}>
         Retire
       </button>

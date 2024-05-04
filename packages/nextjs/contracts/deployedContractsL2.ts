@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   84532: {
     FundingPool: {
-      address: "0xbf43dd411e901695be7945fa35f8ceee159546d2",
+      address: "0x1fbb0ebed00f170f2eb3861dbc53ca1afa959f0d",
       abi: [
         {
           type: "constructor",
@@ -149,6 +149,19 @@ const deployedContracts = {
               internalType: "uint256",
             },
           ],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "currentEpoch",
+          inputs: [],
           outputs: [
             {
               name: "",

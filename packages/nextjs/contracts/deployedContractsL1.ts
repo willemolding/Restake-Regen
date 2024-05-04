@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   11155111: {
     RegenPledgeRegistry: {
-      address: "0xeb5b8c5699669a1645f94b921a9fcb81c32406ec",
+      address: "0x2012795f158d0d1453a9459441a38a67cafdcb82",
       abi: [
         {
           type: "constructor",
@@ -43,21 +43,6 @@ const deployedContracts = {
               name: "amount",
               type: "uint256",
               internalType: "uint256",
-            },
-            {
-              name: "root",
-              type: "uint256",
-              internalType: "uint256",
-            },
-            {
-              name: "nullifierHash",
-              type: "uint256",
-              internalType: "uint256",
-            },
-            {
-              name: "proof",
-              type: "uint256[8]",
-              internalType: "uint256[8]",
             },
           ],
           outputs: [],
@@ -105,7 +90,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     RegenChallengeManager: {
-      address: "0x06034797b945590e038928249f2ac805c4f43d78",
+      address: "0x6361e6d782589f94f23c86d26943a8b2b4153ef7",
       abi: [
         {
           type: "constructor",
@@ -261,7 +246,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     RegenServiceManager: {
-      address: "0x9da3e866c6b9ede493a209069575ab8b6c4fc549",
+      address: "0xf1350320c083d1ef4ad6dc350321fcac81d75b13",
       abi: [
         {
           type: "constructor",

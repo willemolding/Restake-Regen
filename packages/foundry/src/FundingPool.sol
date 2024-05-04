@@ -73,22 +73,18 @@ contract FundingPool {
 
         for (uint256 i = 0; i < tco2s.length; i++) {
             console.log("TCO2 Balance: %d", IERC20(tco2s[i]).balanceOf(address(this)));
-
-            // need to approve the escrow to receive the tokens
-            IERC20(tco2s[i]).approve(address(this), amounts[i]);
-            // TODO: get retirements working
             // IToucanCarbonOffset(tco2s[i]).requestRetirement(
             //     CreateRetirementRequestParams({
             //         tokenIds: new uint256[](0),
             //         amount: amounts[i],
-            //         retiringEntityString: "",
+            //         retiringEntityString: "Restake//Regen",
             //         beneficiary: address(this),
-            //         beneficiaryString: "",
-            //         retirementMessage: "",
+            //         beneficiaryString: "Restake//Regen",
+            //         retirementMessage: "Offsetting carbon emissions from the Restake//Regen project",
             //         beneficiaryLocation: "",
-            //         consumptionCountryCode: "",
-            //         consumptionPeriodStart: 0,
-            //         consumptionPeriodEnd: 0
+            //         consumptionCountryCode: "Ethereum",
+            //         consumptionPeriodStart: block.timestamp - EPOCH_SECONDS,
+            //         consumptionPeriodEnd: block.timestamp
             //     })
             // );
         }
@@ -128,7 +124,7 @@ contract FundingPool {
     // Internal functions
     //////////////////////////////////
 
-    function currentEpoch() internal view returns (uint256) {
+    function currentEpoch() public view returns (uint256) {
         return (block.timestamp / EPOCH_SECONDS);
     }
 }

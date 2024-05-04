@@ -22,7 +22,7 @@ export const RegisterCommitmentForm = () => {
     console.log(proof);
     await writeRegenPledgeRegistry({
       functionName: "makePledge",
-      args: [operator, parseEther(amount), worldcoinProof?.merkle_root, worldcoinProof?.nullifier_hash, proof],
+      args: [operator, parseEther(amount)], //, worldcoinProof?.merkle_root, worldcoinProof?.nullifier_hash, proof],
     });
   };
 
