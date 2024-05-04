@@ -6,54 +6,36 @@ slideOptions:
 # <img src="https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 100px; height: 100px; vertical-align: middle;"> Restake//Regen
 
 
-An Eigenlayer AVS that allows Ethereum validators to pledge and be held accountable to their commitment to offset a fraction of the network's carbon emissions.
+An Eigenlayer Actively Validated Service (AVS) that allows Ethereum validators to pledge and be held accountable to their commitment to offset a fraction of the network's carbon emissions.
 
 <br>
 
 <sub>*Developed by Dr. Willem Olding and Dr. Nic Pittman*
-*For the Eth Global Sydney Hackathon*</sub>
+*As part of the Eth Global Sydney Hackathon*</sub>
 
 ---
 
 ### <img src="https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 100px; height: 100px; vertical-align: middle;"> Overview 1
 
-Protocols like Celo [can claim to be carbon neutral](https://blog.celo.org/a-carbon-negative-blockchain-its-here-and-it-s-celo-60228de36490) because the protocol itself takes a small cut of every block rewards which goes to a carbon offset fund.
+Protocols like Celo [can claim to be carbon neutral](https://blog.celo.org/a-carbon-negative-blockchain-its-here-and-it-s-celo-60228de36490) because the protocol takes a small cut of every block reward which goes to a carbon offset fund.
 
 ---
 
 ### <img src="https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 100px; height: 100px; vertical-align: middle;"> Overview 2
 
-Ethereum's move to proof-of-stake (POS) cut its energy use by over [8000x](https://ethereum.org/en/energy-consumption/), however the POS network has a network of over 1 Million lightweight validator nodes running various hardware, emitting roughly [2,000 Tonnes of CO2 annually across the network](https://ccaf.io/cbnsi/ethereum/ghg). 
+Ethereum's move to proof-of-stake (PoS) cut its energy use by over [8000x](https://ethereum.org/en/energy-consumption/), however the PoS network has a growing network of over 1 million lightweight validator nodes running various hardware, emitting [~2,000 Tonnes of CO2 annually across the network](https://ccaf.io/cbnsi/ethereum/ghg). 
 
 ---
 
-### <img src="https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 100px; height: 100px; vertical-align: middle;"> Overview 3
-
-We can implement carbon offsetting on Ethereum using [Eigenlayer restaking and slashing mechanisms](https://www.blog.eigenlayer.xyz/ycie/) by defining an AVS (Actively Validated Service) that enforces opterators to pledge to subsidise their carbon emissions from running a node by retiring high quality [Toucan Biochar (CHAR) carbon credits](https://app.toucan.earth/) on Base L2.
-
----
-
-### Ethereum's Carbon Footprint
-![emissions_and_validators](https://github.com/willemolding/Restake-Regen/blob/main/assets/figures/emissions_per_validator_singleplot.png?raw=true)
-
-The number of validators and overall energy use is not constant over time and we can assume that the network carbon output will continue to grow in the future as the number of validators increases. 
-
----
-
-![emissions_per_validator](https://github.com/willemolding/Restake-Regen/blob/main/assets/figures/emissions_per_validator_epoch.png?raw=true)
-
-We use a Chainlink AnyAPI Oracle adapt the TC02 required each epoch so that % offset remains constant
-
----
-
-These offset numbers are negligable per validator, and we propose that operators may opt-in to 1x, 5x, 10x, 100x, 1000x or 10,000x (roughly ~0.0001-1% of the total network) of their emissions to help green the network.
-
-[SCREENSHOT]
+<div align="center">
+  <img src="https://github.com/willemolding/Restake-Regen/blob/main/assets/figures/emissions_per_validator_singleplot.png?raw=true" width="70%" height="50%" alt="Emissions and Validators">
+</div>
+The number of validators and carbon emissions is not constant over time and the network carbon output will likely continue to grow in the future as the number of validators increases. 
 
 ---
 
 ## Toucan CHAR Carbon Credits
-Toucan is a trusted carbon credit cryptocurrency and recently released high quality [CHAR](https://app.toucan.earth/) credits on Base L2 in March 2024, currently priced at ~$160 USD (May 4, 2024).
+Toucan is a trusted carbon credit cryptocurrency and recently released high quality biochar [CHAR](https://app.toucan.earth/) credits on Base L2 in March 2024, currently priced at ~$160 USD (May 4, 2024).
 At todays price, the total Ethereum annual network carbon cost equates to: 
 - $320,000 per year
 - <32c per validator per year, or
@@ -61,18 +43,27 @@ At todays price, the total Ethereum annual network carbon cost equates to:
 
 ---
 
-## Restake//Regen System Components
+These offset numbers are negligable per validator, and we propose that operators may opt-in to 1x, 5x, 10x, 100x, 1000x or 10,000x (~0.0001-1% of the total network) of their emissions to help green the network.
+
+---
+
+## Restake//Regen Components
 
 ![Restake-Regen Network Architecture](https://github.com/willemolding/Restake-Regen/blob/main/assets/figures/network_diagram.excalidraw.svg?raw=True)
 
+---
 
 ### Chainlink Cross Chain Interoperability (CCIP)
 We use the Chainlink CCIP to send Challenge and Pledge receipt messages between Ethereum L1 and Base L2. 
 
 ---
 
+We use a Chainlink AnyAPI Oracle of Carbon Emissions adapt the CHAR required each epoch so that the % network offset remains constant
+
+---
+
 ### Worldcoin ID Points System
-We use Worldcoin Proof of Personhood for Sybil restistance to our non-linear Net Zero Points system.
+We use Worldcoin Proof of Personhood for Sybil resistance to our non-linear Net-zero Points system.
 
 
 $$\textrm{NetZeroPoints} = \textrm{SignupBonus}+\int_{t_{signup}}^t \textrm{stake out}$$
@@ -83,15 +74,17 @@ $$\textrm{NetZeroPoints} = \textrm{SignupBonus}+\int_{t_{signup}}^t \textrm{stak
 
 ---
 
-![Restake-Regen Whistleblower Flow](https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/figures/whistleblower_flow_diagram.excalidraw.svg)
+![Restake-Regen Whistleblower Flow](https://raw.githubusercontent.com/willemolding/Restake-Regen/74102deddb53e276d05e7ccf347de96c89141536/assets/figures/whistleblower_flow_diagram.excalidraw.svg)
+
 
 ---
 
-### Summary
+### <img src="https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 100px; height: 100px; vertical-align: middle;"> Summary 3
 
-Restake//Regen is an AVS which allows operators to sign up to pledge their commitment to a particular fraction of the total network carbon emissions.
+We implemented carbon offsetting on Ethereum using [Eigenlayer restaking and slashing mechanisms](https://www.blog.eigenlayer.xyz/ycie/) by creating an Actively Validated Service (AVS). 
 
-Toucan CHAR is the high quality credit of choice, and we hope to eventually offset the entire 2,000T CO2 of annual Ethereum carbon emissions.
+The Restake//Regen AVS, holds accountability to operators that pledge to offset their validator carbon emissions by retiring high quality [Toucan Biochar (CHAR) carbon credits](https://app.toucan.earth/) on Base L2.
+
 
 ---
 
