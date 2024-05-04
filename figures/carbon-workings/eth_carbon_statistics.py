@@ -336,9 +336,13 @@ fig.update_layout(
 # Save plotly figures
 
 width_px = 800
-fig.write_image("figures/emissions_per_validator.png", width=width_px, height=height_px)
+fig.write_image(
+    "figures/emissions_per_validator_singeplot.png", width=width_px, height=height_px
+)
 fig.write_html(
-    "figures/emissions_per_validator.html", include_plotlyjs="cdn", full_html=False
+    "figures/emissions_per_validator_singleplot.html",
+    include_plotlyjs="cdn",
+    full_html=False,
 )
 
 # Show plot

@@ -106,3 +106,4 @@ Restake//Regen AVS stakers receive bonus points on on signup, and rewards over t
 
     - CCIP receiver calls into our slasher contract with the "evidence". `ChallengeManager` contract checks if this constitues a slashable offence (e.g. epoch has ended, amount is less than pledged by validator) and slashes the given validators staked Ethereum if they did not meet their pledge.
 
+
