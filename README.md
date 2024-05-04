@@ -37,23 +37,34 @@ The Ethereum network has recently grown past 1,000,000 active validators with em
 Figure 1: Total Ethereum Validators and Carbon Emissions. Data sources of Ethereum Validator Data come from [Bitquery](https://ide.bitquery.io/ETH2-validators-deposits) and the CBNSI Ethereum CO2 emissions from their [data portal](https://ccaf.io/cbnsi/ethereum/ghg) and [API](https://ccaf.io/cbeci/api/eth/pos/charts/total_greenhouse_gas_emissions/monthly). Figure was produced by [eth_carbon_statistics.py](figures/carbon-workings/eth_carbon_statistics.py)
 
 
-Figure 1 shows that the number of validators and overall energy use is not constant over time. There is technically no upper maximum to number of Ethereum validators, thus we can assume that the network energy will continue to go up over time. As such, we require an Oracle to distribute the monthly carbon emissions of Ethereum on chain to Restake//Regen. The average Ethereum validator carbon expense has dropped from 0.004TCO2 (4kg CO2) / Validator / Epoch in April 2023, to 0.001TCO2 (~1kg CO2) in April 2024, suggesting that the network and global energy mix is greening over time.
+Figure 1 shows that the number of validators and overall energy use is not constant over time. There is technically no upper maximum to number of Ethereum validators, thus we can assume that the network energy will continue to go up over time. As such, we require an Oracle to distribute the monthly carbon emissions of Ethereum on chain to Restake//Regen. 
+
+
+![emissions_per_validator](https://github.com/willemolding/Restake-Regen/blob/main/assets/figures/emissions_per_validator_epoch.png?raw=true)
+Figure 2: CO2 Emissions per validator per epoch
+
+The average Ethereum validator carbon emissions has dropped from 0.004TCO2 (4kg CO2) / validator / epoch in April 2023, to 0.001TCO2 (~1kg CO2) in April 2024, suggesting that the network and global energy mix is greening over time (Figure 2).
 
 These numbers are negligible per validator, and we propose that validators may opt-in to 1x 5x, 10x, 100x, 1000x or 10,000x (roughly ~0.0001-1% of the total network) of their emissions to help green Ethereum.
 
 
 ## Toucan Carbon Credits
-Toucan is a well trusted carbon credit cryptocurrency system based on bridged, real world offsets and transparent projects from Vera and Gold Standard carbon registries.
-Toucan deployed their high quality [CHAR](https://app.toucan.earth/) credits on Base L2 in March 2024, currently priced at ~$160 USD (May 4, 2024).
 
 ![Toucan CHAR projects](assets/Toucan_CHAR_image.png)
+Figure 3: Toucan CHAR token price, projects and pools.
 
-At todays price, the total Ethereum annual network carbon cost equates to roughly $320,000 USD per year, or <$0.32 per validator per year or ~2c per validator per 28 day epoch.
+Toucan is a well trusted carbon credit cryptocurrency system based on bridged, real world offsets and transparent projects from Vera and Gold Standard carbon registries into TCO2 tokens and relevant carbon pools.
+Toucan deployed their high quality [CHAR](https://app.toucan.earth/) pool on Base L2 in March 2024, currently priced at ~$160 USD (May 4, 2024).
+
+Multiple offset projects area available with high transparency.
+
+At the CHAR price of ~$160USD, the total Ethereum annual network carbon cost and 1M validators equates to roughly $320,000 USD per year, or <$0.32 per validator per year or ~2c per validator per 28 day epoch.
 
 
 ## Restake//Regen System Components
 
 ![Restake-Regen Network Architecture](assets/figures/network_diagram.excalidraw.svg)
+Figure 4: Restake//Regen Network Architecture
 
 There are three main components to the Restake//Regen AVS. 
 1. Restake//Regen AVS (Ethereum L1)
@@ -66,9 +77,14 @@ And two main user types:
 
 ### Workflow
 ![Restake-Regen Operator Flow](assets/figures/operator_flow_diagram.excalidraw.svg)
+
 ![Restake-Regen Whistleblower Flow](assets/figures/whistleblower_flow_diagram.excalidraw.svg)
 
 
+## Major Infrastructure Components
+
+
+* LINK TO GH LOCATIONS *
 
 ### EigenLayer AVS
 - Basic Setup to run the full Eigenlayer stack
