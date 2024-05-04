@@ -17,7 +17,7 @@ function requestEmissionsData() public returns (bytes32 requestId) {
     req.add("get", "https://ccaf.io/cbeci/api/eth/pos/charts/total_greenhouse_gas_emissions/monthly");
 
     // Hope this works????
-    req.add("path", "data.28.y");
+    req.add("path", "data,28,y");
 
     // Multiply the result by 1000 to convert from kilo tonnes to tonnes
     req.addInt("times", 1000);
