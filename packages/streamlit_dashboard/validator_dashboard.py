@@ -113,10 +113,13 @@ filtered_data = filtered_data[filtered_data["Date"].dt.month == report_month]
 
 
 col1, col2 = st.columns(2)
-pledge_contribution_decimal = col1.selectbox(
-    "Choose your contribution level (% of Ethereum Network):",
-    options=[1, 0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001],
-    index=4,
+pledge_contribution_decimal = (
+    col1.selectbox(
+        "Choose your contribution level (% of Ethereum Network):",
+        options=[100, 50, 20, 5, 2, 1, 0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001],
+        index=5,
+    )
+    / 100
 )
 
 char_price = col2.slider(
