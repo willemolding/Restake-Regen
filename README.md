@@ -1,6 +1,6 @@
 # 🌱 Restake//Regen
 
-🧠 An Eigenlayer AVS public good that allows Ethereum validators to pledge their commitment to offset their energy usage and carbon expenses by committing to purchasing and retiring high-quality carbon credits.
+🧠 An Eigenlayer AVS public good that allows Ethereum validators to pledge their commitment to offset either their own or a fraction of the network's energy usage and carbon expenses by pledging to purchasing and retiring high-quality carbon credits.
 
 
 ## Overview
@@ -9,7 +9,7 @@
 
 Protocols like Celo [can claim to be carbon neutral](https://blog.celo.org/a-carbon-negative-blockchain-its-here-and-it-s-celo-60228de36490) because the protocol itself takes a small cut of every block rewards which goes to a carbon offset fund.
 
-Adding this to Ethereum is impossible without a hard-fork however we can get a similar result using Eigenlayer restaking and slashing mechanisms by defining an AVS (Actively Validated Service) that enforces their commitment to subsidising the energy usage of running a node by retiring high quality[ Toucan Biochar (CHAR) carbon credits](https://app.toucan.earth/) on Base L2.
+Adding this to Ethereum is impossible without a hard-fork however we can get a similar result using Eigenlayer restaking and slashing mechanisms by defining an AVS (Actively Validated Service) that enforces their pledge to subsidising the energy usage of running a node by retiring high quality[ Toucan Biochar (CHAR) carbon credits](https://app.toucan.earth/) on Base L2.
 
 Validators register (opt-in) with the AVS with a self-selected % pledge of the total etherium network (between 0.0001% and 1%) and then each epoch (28 days with 13 months a year per the [International Fixed Calendar](https://en.wikipedia.org/wiki/International_Fixed_Calendar)) they must send the required amount of CHAR to the Restake//Regen Funding Pool contract, which is then offset every 1T accumulated by anyone. The offset amount required is defined by a custom [Chainlink Any API](https://docs.chain.link/any-api/get-request/examples/array-response#example) oracle linked to the [Cambridge Blockchain Network Sustainability Index API]( https://ccaf.io/cbnsi/ethereum/ghg).
 
@@ -77,5 +77,5 @@ Base Sepolia
 
 Sepolia L1
 
-- CCIP receiver calls into our slasher contract with the "evidence". ChallengeManager contract checks if this constitues a slashable offence (e.g. epoch has ended, amount is less than committed to by validator) and slashes the given validator if required.
+- CCIP receiver calls into our slasher contract with the "evidence". ChallengeManager contract checks if this constitues a slashable offence (e.g. epoch has ended, amount is less than pledged by validator) and slashes the given validator if required.
 
