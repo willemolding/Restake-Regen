@@ -1,10 +1,9 @@
 //SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
-import "@eigenlayer-middleware/src/ServiceManagerBase.sol";
 import {RegenChallengeManager} from "./RegenChallengeManager.sol";
 
-contract RegenServiceManager is ServiceManagerBase {
+contract RegenServiceManager {
     RegenChallengeManager public immutable challengeManager;
 
     /// @notice when applied to a function, ensures that the function is only callable by the `challengeManger` contract.
@@ -17,17 +16,8 @@ contract RegenServiceManager is ServiceManagerBase {
     }
 
     constructor(
-        IAVSDirectory _avsDirectory,
-        IRegistryCoordinator _registryCoordinator,
-        IStakeRegistry _stakeRegistry,
         RegenChallengeManager _challengeManager
     )
-        ServiceManagerBase(
-            _avsDirectory,
-            IPaymentCoordinator(address(0)), // restake-regen doesn't need to deal with payments
-            IRegistryCoordinator(address(0)), // we have our own registry
-            _stakeRegistry
-        )
     {
         challengeManager = _challengeManager;
     }
