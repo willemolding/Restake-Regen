@@ -2,6 +2,7 @@
 name = "carbon-working"
 version = "0.1.0"
 description = ""
+authors="RestakeRegen <nacpittman@gmail.com>"
 readme = "README.md"
 
 [tool.poetry.dependencies]
