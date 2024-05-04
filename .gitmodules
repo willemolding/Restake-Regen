@@ -7,3 +7,18 @@
 [submodule "packages/foundry/lib/solidity-bytes-utils"]
 	path = packages/foundry/lib/solidity-bytes-utils
 	url = https://github.com/gnsps/solidity-bytes-utils
+[submodule "packages/foundry/lib/dynamic-fee-pools"]
+	path = packages/foundry/lib/dynamic-fee-pools
+	url = https://github.com/ToucanProtocol/dynamic-fee-pools
+[submodule "packages/foundry/lib/openzeppelin-contracts-upgradeable"]
+	path = packages/foundry/lib/openzeppelin-contracts-upgradeable
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable
+[submodule "packages/foundry/lib/chainlink"]
+	path = packages/foundry/lib/chainlink
+	url = https://github.com/smartcontractkit/chainlink
+[submodule "packages/foundry/lib/ccip"]
+	path = packages/foundry/lib/ccip
+	url = https://github.com/smartcontractkit/ccip
+[submodule "packages/foundry/lib/chainlink-local"]
+	path = packages/foundry/lib/chainlink-local
+	url = https://github.com/smartcontractkit/chainlink-local
