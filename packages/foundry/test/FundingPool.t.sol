@@ -4,7 +4,8 @@ import "forge-std/Test.sol";
 import "forge-std/console.sol";
 
 import "../src/FundingPool.sol";
-import "../src/ChallengeReceiver.sol";
+import "../src/RegenChallengeManager.sol";
+import "../src/RegenPledgeRegistry.sol";
 
 import {CCIPLocalSimulatorFork} from "@chainlink/local/src/ccip/CCIPLocalSimulatorFork.sol";
 
@@ -61,21 +62,30 @@ contract ContributeTest is Test {
         fundingPool.retire(tokens, amounts, type(uint256).max);
     }
 
-    // function testChallenge() public {
-    //     // deploy the receiver on L1
-    //     vm.selectFork(sepoliaFork);
-    //     assertEq(vm.activeFork(), sepoliaFork);
+    function testChallenge() public {
+        // deploy the receiver on L1
+        vm.selectFork(sepoliaFork);
+        assertEq(vm.activeFork(), sepoliaFork);
 
-    //     ChallengeReceiver challengeReceiver = new ChallengeReceiver(L1_CCIP_ROUTER);
+        RegenPledgeRegistry pledgeRegistry = new RegenPledgeRegistry();
+        RegenChallengeManager RegenchallengeManager = new RegenChallengeManager(L1_CCIP_ROUTER, pledgeRegistry);
 
-    //     vm.selectFork(baseSepoliaFork);
-    //     assertEq(vm.activeFork(), baseSepoliaFork);
+        vm.selectFork(baseSepoliaFork);
+        assertEq(vm.activeFork(), baseSepoliaFork);
 
-    //     FundingPool fundingPool = new FundingPool(CHAR_TOKEN, BASE_CCIP_ROUTER, address(challengeReceiver), L1_CHAIN_SELECTOR);
-    //     fundingPool.challenge{value: 1 ether}(address(this), 0);
+        FundingPool fundingPool = new FundingPool(CHAR_TOKEN, BASE_CCIP_ROUTER, address(RegenchallengeManager), L1_CHAIN_SELECTOR);
+        fundingPool.challenge{value: 1 ether}(address(this), 0);
 
-    //     console.log("Challenge sent");
+        console.log("Challenge sent");
 
-    //     ccipLocalSimulatorFork.switchChainAndRouteMessage(sepoliaFork);
-    // }
+        ccipLocalSimulatorFork.switchChainAndRouteMessage(sepoliaFork);
+    }
+
+    function testPledgeMetChallengeFails() public {
+        // show how if a registered pledger has made their pledge then the challenge will fail
+    }
+
+    function testCannotChallengeDuringEpoch() public {
+        // show how if a challenge is made in the current epoch it will fail
+    }
 }

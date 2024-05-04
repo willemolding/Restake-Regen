@@ -51,13 +51,13 @@ contract FundingPool {
     function contribute(
         address _from,
         uint256 _value,
-        address _contributor
+        address _operator
     ) external {
         require(
             charToken.transferFrom(_from, address(this), _value),
             "Transfer failed"
         );
-        contributions[_contributor][currentEpoch()] += _value;
+        contributions[_operator][currentEpoch()] += _value;
     }
 
     /// @notice Exchanges all CHAR tokens currently in the pool for tCO2 and then retires them
@@ -77,28 +77,28 @@ contract FundingPool {
             // need to approve the escrow to receive the tokens
             IERC20(tco2s[i]).approve(address(this), amounts[i]);
             // TODO: get retirements working
-            IToucanCarbonOffset(tco2s[i]).requestRetirement(
-                CreateRetirementRequestParams({
-                    tokenIds: new uint256[](0),
-                    amount: amounts[i],
-                    retiringEntityString: "",
-                    beneficiary: address(this),
-                    beneficiaryString: "",
-                    retirementMessage: "",
-                    beneficiaryLocation: "",
-                    consumptionCountryCode: "",
-                    consumptionPeriodStart: 0,
-                    consumptionPeriodEnd: 0
-                })
-            );
+            // IToucanCarbonOffset(tco2s[i]).requestRetirement(
+            //     CreateRetirementRequestParams({
+            //         tokenIds: new uint256[](0),
+            //         amount: amounts[i],
+            //         retiringEntityString: "",
+            //         beneficiary: address(this),
+            //         beneficiaryString: "",
+            //         retirementMessage: "",
+            //         beneficiaryLocation: "",
+            //         consumptionCountryCode: "",
+            //         consumptionPeriodStart: 0,
+            //         consumptionPeriodEnd: 0
+            //     })
+            // );
         }
     }
 
 
-    function challenge(address contributor, uint256 epoch) external payable returns (bytes32) {
+    function challenge(address operator, uint256 epoch) external payable returns (bytes32) {
         Client.EVM2AnyMessage memory message = Client.EVM2AnyMessage({
             receiver: abi.encode(challengeReceiver),
-            data: abi.encode(contributor, epoch, contributions[contributor][epoch]),
+            data: abi.encode(operator, epoch, contributions[operator][epoch]),
             tokenAmounts: new Client.EVMTokenAmount[](0),
             extraArgs: Client._argsToBytes(
                 // Additional arguments, setting gas limit
