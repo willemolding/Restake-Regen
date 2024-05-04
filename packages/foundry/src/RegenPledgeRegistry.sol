@@ -27,9 +27,9 @@ contract RegenPledgeRegistry {
     function makePledge(
         address operator, // address of the operator making the pledge
         uint256 amount // fraction of the network this operator wants to offset. This is encoded such that 1e18 is 100%
-        // uint256 root, //WorldID Merkle root
-        // uint256 nullifierHash, // WorldID nullifier hash
-        // uint256[8] calldata proof // WorldID proof
+        uint256 root, //WorldID Merkle root
+        uint256 nullifierHash, // WorldID nullifier hash
+        uint256[8] calldata proof // WorldID proof
     ) public {
         // in the proper implementation this will first check the operator is
         // registered with Eigenlayer and has been delegated the required amount of stake

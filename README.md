@@ -7,9 +7,6 @@ Check out the [validator dashboard](https://restake-regen-validator-dashboard.st
 
 An Eigenlayer AVS public good that allows Ethereum validators to pledge their commitment to offset a fraction of the network's carbon emissions by pledging to purchase and retire high-quality carbon credits.
 
-*Developed by Dr. Willem Olding and Dr. Nic Pittman*
-
-
 ## Overview
 
 Protocols like Celo [can claim to be carbon neutral](https://blog.celo.org/a-carbon-negative-blockchain-its-here-and-it-s-celo-60228de36490) because the protocol itself takes a small cut of every block rewards which goes to a carbon offset fund.
@@ -88,15 +85,21 @@ Figure 4: Operator Workflow
 ![Restake-Regen Whistleblower Flow](assets/figures/whistleblower_flow_diagram.excalidraw.svg)
 
 Figure 5: Whistleblower workflow
-## Major Infrastructure Components
 
-
-* LINK TO GH LOCATIONS *
+## Major Components to review
 
 ### EigenLayer AVS
+
+[RegenServiceManager Contract](./packages/foundry/src/RegenServiceManager.sol)
+
+[L1 Deployment Script](./packages/foundry/script/DeployL1.s.sol)
+
 - Basic Setup to run the full Eigenlayer stack
 
 ### Pledge Registry
+
+[RegenPledgeRegistry Contract](./packages/foundry/src/RegenPledgeRegistry.sol)
+
 - Sign up to the AVS
 - Opt-in to a specific % of the ethereum network (between 0.0001% and 1%)
 
@@ -108,6 +111,11 @@ Allows anyone to challenge if an operator has not made their pledged CHAR retire
  - Chainlink AnyAPI connection with the CBNSI Web2 API. 
 
 ### Funding Pool (Base L2)
+
+[FundingPool Contract](./packages/foundry/src/FundingPool.sol)
+
+[L2 Deployment Script](./packages/foundry/script/DeployL2.s.sol)
+
  - `Contribute`
 Allows operators to call the `Contribute` function to add CHAR tokens to the Funding Pool, and get a receipt for these CHAR tokens being retired on behalf of an operator. These tokens are pooled before burning (CHAR retirement must be in 1T increments). The Funding Pool then Stores the retirement and allows proofs of this contribution to be sent to L1, as to clear any challenges at a later date
 - `Challenge`
@@ -117,19 +125,26 @@ Allows anyone to retire the entire FundingPool CHAR credits (Minimum 1T)
 - `Retirement Receipts`
 Storage of operator contribution receipts, to be used during Challenge acted on L1. 
 
-### Chainlink Cross Chain Interoperability (CCIP)
-We use the Chainlink CCIP to send Challenge and Pledge Receipt messages between Ethereum L1 and Base L2. 
-
-
 
 ### Worldcoin ID Points System
+
+[Proof generation on registration](./packages/nextjs/app/forms/RegisterPledgeForm.tsx)
+
+[RegenPledgeRegistry Contract](./packages/foundry/src/RegenPledgeRegistry.sol)
+
 We use Worldcoin Proof of Personhood for sybil restistance to our non-linear points system.
 Restake//Regen AVS stakers receive bonus points on on signup, and rewards over time for their ongoing climate pledge and retirement of CHAR carbon offsets.
 
 $$NetZeroPoints = SignupBonus+\int_{t_{signup}}^t stake\ out$$
 
-
 ### The AVS Slashing flow (from Base Sepolia to Sepolia)
+
+[Sender on L2](./packages/foundry/src/FundingPool.sol)
+
+[Receiver on L1](./packages/foundry/src/RegenChallengeManager.sol)
+
+We use the Chainlink CCIP as part of the challenge flow to route the receipt data from Bas2 L2 to Ethereum L1 where the slashing can take place. The data is only sent as needed and the L1 contract determines if the slashing challenge is valid or not. 
+
 
 1. Base Sepolia
     - Whistleblower calls contract on Base Sepolia passing epoch and validator/operator address they want to attempt to slash
@@ -140,9 +155,29 @@ $$NetZeroPoints = SignupBonus+\int_{t_{signup}}^t stake\ out$$
 
     - CCIP receiver calls into our slasher contract with the "evidence". `ChallengeManager` contract checks if this constitues a slashable offence (e.g. epoch has ended, amount is less than pledged by validator) and slashes the given validators staked Ethereum if they did not meet their pledge.
 
+### Web forms for demo
+
+[UI Interaction Forms](./packages/nextjs/app/forms/)
 
 ## Running Restake//Regen
-Steps ...
+
+To build the contracts and deploy them to their respective test networks run
+
+```shell
+cd packages/foundry
+yarn deploy-l1-sepolia  
+yarn yarn deploy-l2-base-sepolia  
+```
+
+This will also updates their addresses in the web interface.
+
+---
+
+To locally host the web interface, from the repo root run
+
+```shell
+yarn start
+```
 
 ## Running the Validator Dashboard
 The validator dashboard should easily be run through two shell scripts
@@ -150,7 +185,7 @@ The validator dashboard should easily be run through two shell scripts
 2. `sh run_validator_dashboard.sh`
 
 
-## Screenshots of the App
+## Screenshots
 
 
 ![Pledge Screenshot](https://github.com/willemolding/Restake-Regen/blob/main/assets/screenshots/pledge.png?raw=true)
@@ -165,5 +200,8 @@ Cambridge Blockchain Ethereum Carbon Estimates
 
 ![sustainability_index](assets/screenshots/cambridge_sustainability_index.png)
 
+## Built with
 
-
+- [scaffold-eth-2](https://github.com/scaffold-eth/scaffold-eth-2)
+- [Foundry](https://github.com/foundry-rs/foundry)
+- [Streamlit](https://streamlit.io/)
