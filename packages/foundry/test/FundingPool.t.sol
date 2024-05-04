@@ -66,7 +66,7 @@ contract ContributeTest is Test {
         vm.selectFork(sepoliaFork);
         assertEq(vm.activeFork(), sepoliaFork);
 
-        RegenChallengeManager RegenchallengeManager = new RegenChallengeManager(L1_CCIP_ROUTER, address(0));
+        RegenChallengeManager RegenchallengeManager = new RegenChallengeManager(L1_CCIP_ROUTER);
 
         vm.selectFork(baseSepoliaFork);
         assertEq(vm.activeFork(), baseSepoliaFork);

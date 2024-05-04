@@ -11,7 +11,9 @@ contract RegenChallengeManager is CCIPReceiver {
 
     RegenServiceManager public serviceManager;
 
-    constructor(address _router, address _serviceManager) CCIPReceiver(_router) {
+    constructor(address _router) CCIPReceiver(_router) { }
+
+    function initialize(address _serviceManager) public {
         serviceManager = RegenServiceManager(_serviceManager);
     }
 
