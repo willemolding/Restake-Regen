@@ -11,11 +11,16 @@ An Eigenlayer Actively Validated Service (AVS) that allows Ethereum validators t
 <br>
 
 <sub>*Developed by Dr. Willem Olding and Dr. Nic Pittman*
-*As part of the Eth Global Sydney Hackathon*</sub>
+*for EthGlobal Sydney Hackathon*</sub>
 
 ---
 
-### <img src="https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 100px; height: 100px; vertical-align: middle;"> Overview 1
+![cover_art](https://hackmd.io/_uploads/HJbagRXMC.jpg)
+
+
+---
+
+### <img src="https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 100px; height: 100px; vertical-align: middle;"> Overview
 
 Protocols like Celo [can claim to be carbon neutral](https://blog.celo.org/a-carbon-negative-blockchain-its-here-and-it-s-celo-60228de36490) because the protocol takes a small cut of every block reward which goes to a carbon offset fund.
 
@@ -34,9 +39,15 @@ The number of validators and carbon emissions is not constant over time and the 
 
 ---
 
-## Toucan CHAR Carbon Credits
-Toucan is a trusted carbon credit cryptocurrency and recently released high quality biochar [CHAR](https://app.toucan.earth/) credits on Base L2 in March 2024, currently priced at ~$160 USD (May 4, 2024).
-At todays price, the total Ethereum annual network carbon cost equates to: 
+## CHAR Carbon Credits
+
+![image](https://hackmd.io/_uploads/rk3Esp7fC.png)
+
+Toucan is a trusted web3 carbon credit protocol and recently released high quality biochar [CHAR](https://app.toucan.earth/) credits on Base L2 in March 2024, currently priced at ~$160 USD (May 4, 2024).
+
+---
+
+At May 4, 2024 CHAR price, the total Ethereum annual network carbon costs equate to: 
 - $320,000 per year
 - <32c per validator per year, or
 - ~2c per validator per 28 day epoch.
@@ -53,20 +64,13 @@ These offset numbers are negligable per validator, and we propose that operators
 
 ---
 
-### Chainlink Cross Chain Interoperability (CCIP)
-We use the Chainlink CCIP to send Challenge and Pledge receipt messages between Ethereum L1 and Base L2. 
+![chainlink logo](https://hackmd.io/_uploads/Hk_daTmM0.png)
 
----
+### Chainlink CCIP
 
-We use a Chainlink AnyAPI Oracle of Carbon Emissions adapt the CHAR required each epoch so that the % network offset remains constant
+CCIP allows us to keep all carbon credit accounting natively on Base where gas fees are cheap.
 
----
-
-### Worldcoin ID Points System
-We use Worldcoin Proof of Personhood for Sybil resistance to our non-linear Net-zero Points system.
-
-
-$$\textrm{NetZeroPoints} = \textrm{SignupBonus}+\int_{t_{signup}}^t \textrm{stake out}$$
+Contribution data is sent to L1 via arbitrary message passing when it is needed to slash a particpant
 
 ---
 
@@ -74,17 +78,46 @@ $$\textrm{NetZeroPoints} = \textrm{SignupBonus}+\int_{t_{signup}}^t \textrm{stak
 
 ---
 
-![Restake-Regen Whistleblower Flow](https://raw.githubusercontent.com/willemolding/Restake-Regen/74102deddb53e276d05e7ccf347de96c89141536/assets/figures/whistleblower_flow_diagram.excalidraw.svg)
+![Restake-Regen Whistleblower Flow](https://raw.githubusercontent.com/willemolding/Restake-Regen/c6a64e96875de1051c945150ff074894ad5c84b1/assets/figures/whistleblower_flow_diagram.excalidraw.svg?raw=True)
 
 
 ---
 
-### <img src="https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 100px; height: 100px; vertical-align: middle;"> Summary 3
+![chainlink logo](https://hackmd.io/_uploads/Hk_daTmM0.png)
 
-We implemented carbon offsetting on Ethereum using [Eigenlayer restaking and slashing mechanisms](https://www.blog.eigenlayer.xyz/ycie/) by creating an Actively Validated Service (AVS). 
+A Chainlink AnyAPI Oracle of Carbon Emission data from the Cambridge Blockchain Sustainability Index can adapts the CHAR required each epoch so that the % network offset remains constant
 
-The Restake//Regen AVS, holds accountability to operators that pledge to offset their validator carbon emissions by retiring high quality [Toucan Biochar (CHAR) carbon credits](https://app.toucan.earth/) on Base L2.
+🚧 WIP 🚧
 
+---
+
+### Net-Zero Points
+
+Participants earn points for signing on and continuing to offset
+
+$$\textrm{NetZeroPoints} = \textrm{SignupBonus}+\int_{t_{signup}}^t \textrm{stake}~dt $$
+
+These can be used by anyone to airdrop rewards to those helping to offset emissions
+
+---
+
+### World ID
+
+![image](https://hackmd.io/_uploads/H1Q8paXfR.png)
+
+Net-Zero points can be considered similar to a UBI for offsetters and similarly require Sybil protection to disincentivise splitting stake
+
+Participants must be World ID verified to sign on to earn points
+
+---
+
+### <img src="https://raw.githubusercontent.com/willemolding/Restake-Regen/main/assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 100px; height: 100px; vertical-align: middle;"> Summary
+
+Restake//Regen uses [Eigenlayer restaking and slashing mechanisms](https://www.blog.eigenlayer.xyz/ycie/) to enforce commitments to carbon offsetting
+
+.
+
+This allows projects to go carbon neutral (or negative!) without requiring protocol level changes
 
 ---
 

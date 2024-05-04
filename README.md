@@ -1,5 +1,8 @@
 # <img src="assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 70px; height: 70px; vertical-align: middle;"> Restake//Regen
 
+![emissions_per_validator](assets/cover_art.png?raw=true)
+
+
 An Eigenlayer AVS public good that allows Ethereum validators to pledge their commitment to offset a fraction of the network's carbon emissions by pledging to purchase and retire high-quality carbon credits.
 
 *Developed by Dr. Willem Olding and Dr. Nic Pittman*
@@ -28,13 +31,13 @@ There are a number of reasons a validator would want to pledge their carbon neut
 3. Meeting Social pressure: Feel good, Meme and Marketing and Alignment with Ethical Values
 4. Long term viability of the Ethereum Network: Ethereum's energy usage and emissions are going up over time, even if the network and per validator are becoming more carbon efficient overall.
 5. Cash Flow: Adds market pressure to a new class of on-chain carbon. Furthermore, allows validators to amortise their carbon emission costs monthly rather than a one-off multi-year commitment.
-6. Airdrop farming through the Sybill Resistant WorldCoin Proof of Personhood
+6. Airdrop farming NetZero Points using the Sybill Resistant WorldCoin Proof of Personhood
 
 ## Understanding Ethereum's Carbon Footprint
-The Ethereum network has recently grown past 1,000,000 active validators with emissions totalling around 2000 Tonnes CO2 / year. The Ethereum network Energy and CO2 is difficult to estimate, however is predicted and distributed by the Cambridge Blockchain Network Sustainability Index (CBNSI), who provide live estimates of both energy use and carbon expendature [with a robust methodology to account for global electricity mixes](https://ccaf.io/cbnsi/ethereum/ghg/methodology).
+The Ethereum network has recently grown past 1,000,000 active validators with emissions totalling around 2000 Tonnes CO2 / year. The Ethereum network Energy and CO2 is difficult to estimate, however is predicted and distributed by the Cambridge Blockchain Network Sustainability Index (CBNSI), who provide live estimates of both energy use and carbon expenditure [with a robust methodology to account for global electricity mixes](https://ccaf.io/cbnsi/ethereum/ghg/methodology).
 
 ![Emissions per Validator](assets/figures/emissions_per_validator_singleplot.png)
-Figure 1: Total Ethereum Validators and Carbon Emissions. Data sources of Ethereum Validator Data come from [Bitquery](https://ide.bitquery.io/ETH2-validators-deposits) and the CBNSI Ethereum CO2 emissions from their [data portal](https://ccaf.io/cbnsi/ethereum/ghg) and [API](https://ccaf.io/cbeci/api/eth/pos/charts/total_greenhouse_gas_emissions/monthly). Figure was produced by [eth_carbon_statistics.py](figures/carbon-workings/eth_carbon_statistics.py)
+Figure 1: Total Ethereum Validators and Carbon Emissions. Data sources of Ethereum validator data come from [Bitquery](https://ide.bitquery.io/ETH2-validators-deposits) and the CBNSI Ethereum CO2 emissions from their [data portal](https://ccaf.io/cbnsi/ethereum/ghg) and [API](https://ccaf.io/cbeci/api/eth/pos/charts/total_greenhouse_gas_emissions/monthly). Figure was produced by [eth_carbon_statistics.py](figures/carbon-workings/eth_carbon_statistics.py)
 
 
 Figure 1 shows that the number of validators and overall energy use is not constant over time. There is technically no upper maximum to number of Ethereum validators, thus we can assume that the network energy will continue to go up over time. As such, we require an Oracle to distribute the monthly carbon emissions of Ethereum on chain to Restake//Regen. 
@@ -53,7 +56,7 @@ These numbers are negligible per validator, and we propose that validators may o
 ![Toucan CHAR projects](assets/Toucan_CHAR_image.png)
 Figure 3: Toucan CHAR token price, projects and pools.
 
-Toucan is a well trusted carbon credit cryptocurrency system based on bridged, real world offsets and transparent projects from Vera and Gold Standard carbon registries into TCO2 tokens and relevant carbon pools.
+Toucan is a well trusted web3 carbon credit protocol based on bridged, real world offsets and transparent projects from Vera and Gold Standard carbon registries into TCO2 tokens and relevant carbon pools.
 Toucan deployed their high quality [CHAR](https://app.toucan.earth/) pool on Base L2 in March 2024, currently priced at ~$160 USD (May 4, 2024).
 
 Multiple offset projects area available with high transparency.
@@ -78,9 +81,11 @@ And two main user types:
 ### Workflow
 ![Restake-Regen Operator Flow](assets/figures/operator_flow_diagram.excalidraw.svg)
 
+Figure 4: Operator Workflow
+
 ![Restake-Regen Whistleblower Flow](assets/figures/whistleblower_flow_diagram.excalidraw.svg)
 
-
+Figure 5: Whistleblower workflow
 ## Major Infrastructure Components
 
 
@@ -150,9 +155,13 @@ The validator dashboard should easily be run through two shell scripts
 ![Contribute Screenshot](https://github.com/willemolding/Restake-Regen/blob/main/assets/screenshots/contribute.png?raw=true)
 ![Challenge Screenshot](https://github.com/willemolding/Restake-Regen/blob/main/assets/screenshots/challenge.png?raw=true)
 ![Retire Screenshot](https://github.com/willemolding/Restake-Regen/blob/main/assets/screenshots/retire.png?raw=true)
-![Validator Dashboard Screenshot](https://github.com/willemolding/Restake-Regen/blob/main/assets/screenshots/validator_dashboard_streamlit.png?raw=true)
 ![WorldID](https://github.com/willemolding/Restake-Regen/blob/main/assets/screenshots/world-id.png?raw=true)
+![Validator Dashboard Screenshot](https://github.com/willemolding/Restake-Regen/blob/main/assets/screenshots/validator_dashboard_streamlit.png?raw=true)
 
+
+Cambridge Blockchain Ethereum Carbon Estimates
+
+![sustainability_index](assets/screenshots/cambridge_sustainability_index.png)
 
 
 
