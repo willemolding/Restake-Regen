@@ -7,15 +7,15 @@ Developed by Dr. Willem Olding and Dr. Nic Pittman
 
 ## 🌏 Overview
 
-Despite Ethereums move to proof-of-stake (POS) cutting its energy use by over [8000x](https://ethereum.org/en/energy-consumption/), the POS network has a network of over 1 Million lightweight validator nodes running varying hardware, emitting roughly [2,000 Tonnes of CO2 annually across the network](https://ccaf.io/cbnsi/ethereum/ghg). 
-
 Protocols like Celo [can claim to be carbon neutral](https://blog.celo.org/a-carbon-negative-blockchain-its-here-and-it-s-celo-60228de36490) because the protocol itself takes a small cut of every block rewards which goes to a carbon offset fund.
 
-Adding this to Ethereum is impossible without a hard-fork. However, we can get a similar result using [Eigenlayer restaking and slashing mechanisms](https://www.blog.eigenlayer.xyz/ycie/) by defining an AVS (Actively Validated Service) that enforces their pledge to subsidising the energy usage of running a node by retiring high quality [Toucan Biochar (CHAR) carbon credits](https://app.toucan.earth/) on Base L2.
+Ethereums move to proof-of-stake (POS) cut its energy use and carbon emissions by over [8000x](https://ethereum.org/en/energy-consumption/), however the POS network still has a over 1 Million lightweight validator nodes running various hardware, emitting roughly [2,000 Tonnes of CO2 annually across the network](https://ccaf.io/cbnsi/ethereum/ghg). 
+
+Adding Celo-like carbon offsetting to Ethereum is impossible without a hard-fork. However, we can get a similar result using [Eigenlayer restaking and slashing mechanisms](https://www.blog.eigenlayer.xyz/ycie/) by defining an AVS (Actively Validated Service) that enforces their pledge to subsidising the energy usage of running a node by retiring high quality [Toucan Biochar (CHAR) carbon credits](https://app.toucan.earth/) on Base L2.
 
 Validators register (opt-in) with the Restake//Regen AVS with a self-selected % pledge of the total etherium network (between 0.0001% and 1% - 1/10,000 - 1/1,000,000 of the network) and then each epoch (28 days with 13 months a year per the [International Fixed Calendar](https://en.wikipedia.org/wiki/International_Fixed_Calendar)) they must send the required amount of CHAR to the Restake//Regen Funding Pool contract, which is then retired every 1T accumulated by anyone using the open function call. The offset amount required is defined by a custom [Chainlink Any API](https://docs.chain.link/any-api/get-request/examples/array-response#example) oracle linked to the [Cambridge Blockchain Network Sustainability Index API]( https://ccaf.io/cbnsi/ethereum/ghg).
 
-A validator must contribute CHAR to the Restake//Regen Funding Pool in a block within each epoch, and a recipt of this proof is stored in the funding pool. After the Epoch, anyone (i.e. a whistleblower) can challenge a validator through the Funding Pool, and claim they didn't make their promised contribution during the specified timeframe. If the validator did contribute, the receipt is checked and they won't be slashed. If there is no receipt during that epoch, they are slashed by the AVS. 
+A validator must contribute CHAR to the Restake//Regen Funding Pool in a block within each epoch, and a recipt of this proof is stored in the funding pool contract storage. After the Epoch, anyone (i.e. a whistleblower) can challenge a validator through the Funding Pool, and claim they didn't make their promised contribution during the specified timeframe. If the validator did contribute, the receipt is checked and they won't be slashed. If there is no receipt during that epoch, they are slashed by the AVS. 
 
 
 ## Why Restake//Regen?
@@ -39,14 +39,13 @@ Figure 1: Total Ethereum Validators and Carbon Emissions. Data sources of Ethere
 
 Figure 1 shows that the number of validators and overall energy use is not constant over time. There is technically no upper maximum to number of Ethereum validators, thus we can assume that the network energy will continue to go up over time. As such, we require an Oracle to distribute the monthly carbon emissions of Ethereum on chain to Restake//Regen. The average Ethereum validator carbon expense has dropped from 0.004TCO2 (4kg CO2) / Validator / Epoch in April 2023, to 0.001TCO2 (~1kg CO2) in April 2024, suggesting that the network and global energy mix is greening over time.
 
-These numbers are negigble per validator, and we propose that validators may opt-in to 1x 5x, 10x, 100x, 1000x or 10,000x (roughly ~0.0001-1% of the total network) of their emissions to help green the network.
-
+These numbers are negligible per validator, and we propose that validators may opt-in to 1x 5x, 10x, 100x, 1000x or 10,000x (roughly ~0.0001-1% of the total network) of their emissions to help green Ethereum.
 
 
 ## Toucan Carbon Credits
 Toucan is a well trusted carbon credit cryptocurrecy system based on bridged, real world offsets from Vera and Gold Standard carbon registries.
 Toucan deployed their high quality [CHAR](https://app.toucan.earth/) credits on Base L2 in March 2024, currently priced at ~$160 USD (May 4, 2024).
-At todays price, the total Ethereum annual network carbon cost equates to roughly $320,000 per year, or <$0.32c per validator per year or ~2c per validator per 28 day epoch.
+At todays price, the total Ethereum annual network carbon cost equates to roughly $320,000 USD per year, or <$0.32c per validator per year or ~2c per validator per 28 day epoch.
 
 
 ## Restake//Regen System Components
@@ -59,8 +58,8 @@ There are three main components to the Restake//Regen AVS.
 3. Funding Pool (Base L2)
 
 And two main user types:
-1. Validators / Operators
-2. Whistleblowers to call out non-conforming pledges.
+1. Operators, also known as Validators or Stakers
+2. Whistleblowers to call out non-conforming pledges can retire CHAR through Toucan in 1T incremenets from the Funding Pool.
 
 Workflow
 ![Restake-Regen Operator Flow](assets/figures/operator_flow_diagram.excalidraw.svg)
