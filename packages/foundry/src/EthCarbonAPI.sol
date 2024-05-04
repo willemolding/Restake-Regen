@@ -22,7 +22,36 @@ function requestEmissionsData() public returns (bytes32 requestId) {
     // Multiply the result by 1000 to convert from kilo tonnes to tonnes
     req.addInt("times", 1000);
 
+
+
     // Sends the request
     return sendChainlinkRequestTo(oracle, req, fee);
 }
 
+// Not sure if this is valid code below here
+// SPDX-License-Identifier: MIT
+
+contract EthCarbonEmissions is ChainlinkClient {
+    using Chainlink for Chainlink.Request;
+
+    uint256 public emissions;
+    address private oracle;
+    bytes32 private jobId;
+    uint256 private fee;
+
+    // Define the constructor with the oracle details
+    constructor(address _oracle, bytes32 _jobId, uint256 _fee) {
+        setPublicChainlinkToken();
+        oracle = _oracle;
+        jobId = _jobId;
+        fee = _fee;
+    }
+
+    // Function to initiate the request
+    // function requestEmissionsData()... from above
+
+    // Callback function to receive the response
+    function fulfill(bytes32 _requestId, uint256 _emissions) public recordChainlinkFulfillment(_requestId) {
+        emissions = _emissions;
+    }
+}
