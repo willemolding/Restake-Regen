@@ -95,6 +95,9 @@ We use the Chainlink CCIP to send Challenge and Pledge Receipt messages between 
 We use Worldcoin Proof of Personhood for sybil restistance to our non-linear points system.
 Restake//Regen AVS stakers receive bonus points on on signup, and rewards over time for their ongoing climate pledge and retirement of CHAR carbon offsets.
 
+
+
+
 ### The AVS Slashing flow (from Base Sepolia to Sepolia)
 
 1. Base Sepolia
