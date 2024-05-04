@@ -36,7 +36,7 @@ export const ContributeForm = () => {
       <label className="block text-sm font-medium">For Operator</label>
       <AddressInput value={operator} onChange={value => setOperator(value)} />
       <button className="btn btn-sm btn-primary" onClick={submitTransaction}>
-        Make Commitment
+        Fulfil
       </button>
     </div>
   );
