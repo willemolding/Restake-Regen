@@ -77,20 +77,20 @@ contract FundingPool {
             // need to approve the escrow to receive the tokens
             IERC20(tco2s[i]).approve(address(this), amounts[i]);
             // TODO: get retirements working
-            IToucanCarbonOffset(tco2s[i]).requestRetirement(
-                CreateRetirementRequestParams({
-                    tokenIds: new uint256[](0),
-                    amount: amounts[i],
-                    retiringEntityString: "",
-                    beneficiary: address(this),
-                    beneficiaryString: "",
-                    retirementMessage: "",
-                    beneficiaryLocation: "",
-                    consumptionCountryCode: "",
-                    consumptionPeriodStart: 0,
-                    consumptionPeriodEnd: 0
-                })
-            );
+            // IToucanCarbonOffset(tco2s[i]).requestRetirement(
+            //     CreateRetirementRequestParams({
+            //         tokenIds: new uint256[](0),
+            //         amount: amounts[i],
+            //         retiringEntityString: "",
+            //         beneficiary: address(this),
+            //         beneficiaryString: "",
+            //         retirementMessage: "",
+            //         beneficiaryLocation: "",
+            //         consumptionCountryCode: "",
+            //         consumptionPeriodStart: 0,
+            //         consumptionPeriodEnd: 0
+            //     })
+            // );
         }
     }
 

@@ -24,6 +24,6 @@ contract RegenChallengeManager is CCIPReceiver {
 
 
         // if so make a slash
-        serviceManager.freezeOperator(operator);
+        // serviceManager.freezeOperator(operator);
     }
 }
