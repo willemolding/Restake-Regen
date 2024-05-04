@@ -99,9 +99,9 @@ validators_offset = cost_in_char / avg_validator
 # Check if there is data to display, and show it
 if not filtered_data.empty:
     #    st.write(filtered_data)
-    st.write(f"### Total Tonnes /  CHAR Tokens: {cost_in_char}")
-    st.write(f"### Total USDC Cost per epoch: ${cost_in_usdc}")
-    st.write(f"### Validators Offset: {int(validators_offset)}")
+    st.write(f"### Total Tonnes CO2 this epoch: {cost_in_char} CHAR")
+    st.write(f"### Total Cost this epoch: ${cost_in_usdc} USD")
+    st.write(f"### # Validators Offset: {int(validators_offset)}")
 #  st.write(f"Total Tonnes of CO2 required, Eth Tokens: {cost_in_eth}")
 
 else:
