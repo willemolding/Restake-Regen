@@ -135,7 +135,7 @@ Storage of operator contribution receipts, to be used during Challenge acted on 
 We use Worldcoin Proof of Personhood for sybil restistance to our non-linear points system.
 Restake//Regen AVS stakers receive bonus points on on signup, and rewards over time for their ongoing climate pledge and retirement of CHAR carbon offsets.
 
-$$NetZeroPoints = SignupBonus+\int_{t_{signup}}^t stake\ out$$
+$$\textrm{NetZeroPoints} = \textrm{SignupBonus}+\int_{t_{signup}}^t \textrm{stake}~dt $$
 
 ### The AVS Slashing flow (from Base Sepolia to Sepolia)
 
