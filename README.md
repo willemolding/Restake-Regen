@@ -97,7 +97,6 @@ Restake//Regen AVS stakers receive bonus points on on signup, and rewards over t
 
 
 
-
 ### The AVS Slashing flow (from Base Sepolia to Sepolia)
 
 1. Base Sepolia
