@@ -136,7 +136,6 @@ df = validators_df.query("'2022-05-01' <= date <= '2024-04-01'")
 
 # %%
 
-# Assuming your DataFrame df is already defined and includes columns for 'total_validators', 'emissions_Tco2', and 'CO2_per_validator'
 height_px = 600
 # Create subplots: two rows, with shared x-axis, specifying that the first row will have two y-axes
 fig = make_subplots(
@@ -241,18 +240,17 @@ fig.update_layout(
 # Save plotly figures
 
 width_px = 800
-fig.write_image("figures/emissions_per_validator.png", width=width_px, height=height_px)
+fig.write_image("../emissions_per_validator.png", width=width_px, height=height_px)
 fig.write_html(
-    "figures/emissions_per_validator.html", include_plotlyjs="cdn", full_html=False
+    "../emissions_per_validator.html", include_plotlyjs="cdn", full_html=False
 )
 
 # Show plot
 fig.show(renderer="browser")
 
 
-# %%
+# %% JUST MAKE ENERGY VS VALIDATORS
 
-# Assuming your DataFrame df is already defined and includes columns for 'total_validators', 'emissions_Tco2', and 'CO2_per_validator'
 height_px = 400
 # Create subplots: two rows, with shared x-axis, specifying that the first row will have two y-axes
 fig = make_subplots(
@@ -336,12 +334,79 @@ fig.update_layout(
 
 width_px = 800
 fig.write_image(
-    "figures/emissions_per_validator_singeplot.png", width=width_px, height=height_px
+    "../emissions_per_validator_singeplot.png", width=width_px, height=height_px
 )
 fig.write_html(
-    "figures/emissions_per_validator_singleplot.html",
+    "../emissions_per_validator_singleplot.html",
     include_plotlyjs="cdn",
     full_html=False,
+)
+
+# Show plot
+fig.show(renderer="browser")
+
+
+# %% AND CO2 PER VALIDATOR PER EPOCH ONLY
+height_px = 400
+# Create subplots: two rows, with shared x-axis, specifying that the first row will have two y-axes
+fig = make_subplots(
+    rows=1,
+    cols=1,
+    shared_xaxes=True,
+    vertical_spacing=0.1,
+    subplot_titles=("CO2 per Validator per 28 day Epoch",),
+    specs=[[{"secondary_y": True}]],
+)  # Specifies that the first row has a secondary y-axis
+
+
+# Add the CO2 per validator trace to the second subplot
+fig.add_trace(
+    go.Scatter(
+        x=df.index,
+        y=df["CO2_per_validator_per_epoch"],
+        name="CO2 per Validator",
+        mode="lines+markers",
+        line=dict(color="green"),
+    ),
+    row=1,
+    col=1,  # Here secondary_y is False because only one y-axis is needed in the second row
+)
+
+# Update axes properties for the second subplot
+fig.update_yaxes(
+    title_text="CO2 Emissions per Validator<br>(Tonnes CO2 per Epoch)",
+    row=1,
+    col=1,
+    tickfont=dict(color="green"),
+    titlefont=dict(color="green"),
+)
+
+# Update overall layout
+fig.update_layout(height=height_px, showlegend=True)
+
+fig.update_layout(
+    legend=dict(
+        x=0.5,  # Center the legend horizontally relative to the plot
+        y=-0.1,  # Place the legend below the plot
+        xanchor="center",  # Center the legend horizontally
+        yanchor="top",  # Anchor the top of the legend to the specified `y`
+        borderwidth=1,
+        bordercolor="Black",
+        bgcolor="White",
+        traceorder="normal",
+        orientation="h",  # Horizontal layout of legend items
+    )
+)
+
+
+# Save plotly figures
+
+width_px = 800
+fig.write_image(
+    "../emissions_per_validator_epoch.png", width=width_px, height=height_px
+)
+fig.write_html(
+    "../emissions_per_validator_epoch.html", include_plotlyjs="cdn", full_html=False
 )
 
 # Show plot
