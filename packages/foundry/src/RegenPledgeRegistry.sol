@@ -36,15 +36,14 @@ contract RegenPledgeRegistry {
 
         // ensure the operator is a unique human that has not registered a pledge before
         // the operator address is the signal in this case
-        // Not sure why we are having trouble getting proofs to verify on Sepolia..
-        // worldId.verifyProof(
-        //     root,
-        //     1, // use orb verification
-        //     abi.encodePacked(operator).hashToField(),
-        //     nullifierHash,
-        //     externalNullifier,
-        //     proof
-        // );
+        worldId.verifyProof(
+            root,
+            1, // use orb verification
+            abi.encodePacked(operator).hashToField(),
+            nullifierHash,
+            externalNullifier,
+            proof
+        );
         // store the nullifier so it cannot be reused
         // usedNullifiers[nullifierHash] = true;
 
