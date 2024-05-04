@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from datetime import datetime, timedelta
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
 
 # GET TOTAL NUMBER OF ETH VALIDATORS
 # Thank youuuu https://ide.bitquery.io/ETH2-validators-deposits
@@ -133,9 +135,6 @@ df = validators_df.query("'2022-05-01' <= date <= '2024-04-01'")
 
 
 # %%
-import pandas as pd
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 
 # Assuming your DataFrame df is already defined and includes columns for 'total_validators', 'emissions_Tco2', and 'CO2_per_validator'
 height_px = 600

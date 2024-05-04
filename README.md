@@ -62,6 +62,12 @@ And two main user types:
 1. Validators / Operators
 2. Whistleblowers to call out non-conforming pledges.
 
+Workflow
+![Restake-Regen Operator Flow](assets/figures/operator_flow_diagram.excalidraw.svg)
+![Restake-Regen Whistleblower Flow](assets/figures/whistleblower_flow_diagram.excalidraw.svg)
+
+
+
 ### EigenLayer AVS
 - Basic Setup to run the full Eigenlayer stack
 
