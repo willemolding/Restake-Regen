@@ -15,6 +15,19 @@ Validators register (opt-in) with the AVS with a self-selected % pledge of the t
 
 A validator must contribute CHAR to the Restake//Regen Funding Pool in a block within each epoch, and a recipt of this proof is stored in the funding pool. At any time, anyone (i.e. a whistleblower) can challenge a validator through the Funding Pool, and claim they didn't make their promised contribution. If the validator did contribute, the receipt is checked and they wont be slashed. If there is no receipt during that epoch, they are slashed by the AVS. 
 
+
+## Why
+Climate is a global economic problem. Web3 provides interesting solutions to the crisis, starting with the bridging of traditional carbon credits on chain.
+There are a number of reasons a validator would want to pledge with Restake//Regen
+1. Risk Mitigation: Climate change poses significant risks to economies, societies, and businesses worldwide. By proactively addressing its carbon footprint, Ethereum can mitigate regulatory, legal, and reputational risks associated with environmental damage
+2. Differentiation and Competitive Advantage:  In a crowded blockchain ecosystem, differentiation is key. Ethereum can differentiate itself from competitors such as Celo by leading the way in sustainability initiatives 
+3. Meeting Social pressure: Feel good, Meme and Marketing 
+4. Alignment with Ethical Values
+4. Airdrop farming
+5. Long term viability of the Etherium Network: Ethereums energy usage and emissions are going up over time, even if the network is becoming more efficient.
+6. Cash Flow: Adding market pressure to a new class of on-chain carbon
+
+
 ## Understanding Ethereum's Carbon Footprint
 The Ethereum network has recently grown past 1,000,000 active validators with emissions totalling around 2000T CO2/Yr. Ethereum network Energy and CO2 is difficult to estimate, however is predicted and distributed by the Cambridge Blockchain Network Sustainability Index (CBNSI) provides live estimates of both energy use and carbon expendature [with a thorough methodology to account for global electricity mixes](https://ccaf.io/cbnsi/ethereum/ghg/methodology).
 Using open source Eth Validator Data from [Bitquery](https://ide.bitquery.io/ETH2-validators-deposits) and the CBNSI Eth CO2 emissions [Data](https://ccaf.io/cbnsi/ethereum/ghg) and [API](https://ccaf.io/cbeci/api/eth/pos/charts/total_greenhouse_gas_emissions/monthly).
