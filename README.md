@@ -33,7 +33,7 @@ There are a number of reasons a validator would want to pledge their carbon neut
 ## Understanding Ethereum's Carbon Footprint
 The Ethereum network has recently grown past 1,000,000 active validators with emissions totalling around 2000 Tonnes CO2 / year. The Ethereum network Energy and CO2 is difficult to estimate, however is predicted and distributed by the Cambridge Blockchain Network Sustainability Index (CBNSI), who provide live estimates of both energy use and carbon expendature [with a robust methodology to account for global electricity mixes](https://ccaf.io/cbnsi/ethereum/ghg/methodology).
 
-![Emissions per Validator](figures/emissions_per_validator_singleplot.png)
+![Emissions per Validator](assets/figures/emissions_per_validator_singleplot.png)
 Figure 1: Total Ethereum Validators and Carbon Emissions. Data sources of Ethereum Validator Data come from [Bitquery](https://ide.bitquery.io/ETH2-validators-deposits) and the CBNSI Ethereum CO2 emissions from their [data portal](https://ccaf.io/cbnsi/ethereum/ghg) and [API](https://ccaf.io/cbeci/api/eth/pos/charts/total_greenhouse_gas_emissions/monthly). Figure was produced by [eth_carbon_statistics.py](figures/carbon-workings/eth_carbon_statistics.py)
 
 
@@ -51,7 +51,7 @@ At todays price, the total Ethereum annual network carbon cost equates to roughl
 
 ## Restake//Regen System Components
 
-![Restake-Regen Network Architecture](figures/network_diagram.excalidraw.svg)
+![Restake-Regen Network Architecture](assets/figures/network_diagram.excalidraw.svg)
 
 There are three main components to the Restake//Regen AVS. 
 1. Restake//Regen AVS (Ethereum L1)
