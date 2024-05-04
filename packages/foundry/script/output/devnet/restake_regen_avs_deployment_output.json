@@ -1,0 +1,12 @@
+{
+  "addresses": {
+    "erc20Mock": "0x0000000000000000000000000000000000000000",
+    "erc20MockStrategy": "0x0000000000000000000000000000000000000000",
+    "operatorStateRetriever": "0x90193C961A926261B756D1E5bb255e67ff9498A1",
+    "regenChallengeManager": "0x4f559F30f5eB88D635FDe1548C4267DB8FaB0351",
+    "regenPledgeRegistry": "0xD718d5A27a29FF1cD22403426084bA0d479869a0",
+    "regenServiceManager": "0x416C42991d05b31E9A6dC209e91AD22b79D87Ae6",
+    "registryCoordinator": "0xDB8cFf278adCCF9E9b5da745B44E754fC4EE3C76",
+    "registryCoordinatorImplementation": "0x4C52a6277b1B84121b3072C0c92b6Be0b7CC10F1"
+  }
+}

@@ -96,7 +96,7 @@ contract Utils is Script {
             vm.projectRoot(),
             "/script/output/"
         );
-        string memory chainDir = string.concat(vm.toString(block.chainid), "/");
+        string memory chainDir = string.concat("devnet", "/");
         string memory outputFilePath = string.concat(
             outputDir,
             chainDir,
