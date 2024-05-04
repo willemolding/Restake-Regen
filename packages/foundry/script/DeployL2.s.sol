@@ -15,6 +15,7 @@ contract DeployL2 is ScaffoldETHDeploy {
     address constant L2_CCIP_ROUTER = 0xD3b06cEbF099CE7DA4AcCf578aaebFDBd6e88a93;
     address constant CHAR_TOKEN = 0xf92f74Dd03f9A9E04773cE5fF3BCeaBB2eB1dDf0;
     uint64 constant L1_CHAIN_SELECTOR = 16015286601757825753;
+    address constant L1_CHALLENGE_MANAGER = 0x0BF3dE8c5D3e8A2B34D2BEeB17ABfCeBaf363A59;
 
     function run() external {
         vm.startBroadcast();
