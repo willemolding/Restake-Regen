@@ -35,9 +35,81 @@ def load_energy_use(
     return eth_emissions
 
 
-eth_emissions = load_energy_use().iloc[:-1]
+# %% LOAD DATA
 
-# Create a Plotly Express line chart
+eth_emissions = load_energy_use().iloc[:-1]
+eth_emissions["Monthly Emissions"] = (
+    eth_emissions["Monthly Emissions"] * 1000
+)  # from Kt to 2
+this_year = datetime.now().year
+this_month = datetime.now().month
+
+# Determine the default index for the radio button
+# It should be the previous month, considering the year rollover
+default_month_index = this_month - 2
+this_year = datetime.now().year
+this_month = datetime.now().month
+month_abbr = month_abbr[1:]
+
+
+# %% Start FE
+
+st.write("## Restake//Regen Validator Dashboard")
+
+col1, col2 = st.columns(2)
+report_month_str = col1.radio("", month_abbr, index=this_month - 2, horizontal=True)
+report_year = col2.selectbox("", range(this_year, this_year - 2, -1))
+report_month = month_abbr.index(report_month_str) + 1
+
+# Display the selected year and month
+col2.text(f"Selected Date: {report_year} {report_month_str}")
+
+# Filtering data based on selected year and month
+filtered_data = eth_emissions[eth_emissions["Date"].dt.year == report_year]
+filtered_data = filtered_data[filtered_data["Date"].dt.month == report_month]
+
+
+col1, col2 = st.columns(2)
+pledge_contribution_decimal = col1.selectbox(
+    "Choose your contribution level (% of Ethereum Network):",
+    options=[1, 0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001],
+    index=4,
+)
+
+char_price = col2.slider(
+    "CHAR Price:",
+    min_value=100,
+    max_value=1000,
+    value=158,
+    step=1,
+)
+
+cost_in_char = filtered_data["Monthly Emissions"].iloc[0] * pledge_contribution_decimal
+cost_in_usdc = (
+    filtered_data["Monthly Emissions"].iloc[0]
+    * pledge_contribution_decimal
+    * char_price
+)
+num_validators = 1e6
+
+avg_validator = filtered_data["Monthly Emissions"].iloc[0] / num_validators
+validators_offset = cost_in_char / avg_validator
+
+
+# Check if there is data to display, and show it
+if not filtered_data.empty:
+    #    st.write(filtered_data)
+    st.write(f"### Total Tonnes /  CHAR Tokens: {cost_in_char}")
+    st.write(f"### Total USDC Cost per epoch: ${cost_in_usdc}")
+    st.write(f"### Validators Offset: {int(validators_offset)}")
+#  st.write(f"Total Tonnes of CO2 required, Eth Tokens: {cost_in_eth}")
+
+else:
+    st.write("No data available for the selected month and year.")
+
+
+# Display the figure using Streamlit
+
 fig = px.line(
     eth_emissions,
     x="Date",
@@ -55,55 +127,8 @@ fig.update_layout(
     template="plotly_white",
 )
 
-# Display the figure using Streamlit
+
 st.plotly_chart(fig)
-
-this_year = datetime.now().year
-this_month = datetime.now().month
-
-# Determine the default index for the radio button
-# It should be the previous month, considering the year rollover
-default_month_index = this_month - 2
-this_year = datetime.now().year
-this_month = datetime.now().month
-report_year = st.selectbox("", range(this_year, this_year - 2, -1))
-month_abbr = month_abbr[1:]
-report_month_str = st.radio("", month_abbr, index=this_month - 2, horizontal=True)
-report_month = month_abbr.index(report_month_str) + 1
-
-
-# Display the selected year and month
-st.text(f"Selected Date: {report_year} {report_month_str}")
-
-# Filtering data based on selected year and month
-filtered_data = eth_emissions[eth_emissions["Date"].dt.year == report_year]
-filtered_data = filtered_data[filtered_data["Date"].dt.month == report_month]
-
-pledge_contribution = st.slider(
-    "Select an Eth Carbon Offset Pledge % of the entire network:",
-    min_value=0.00001,
-    max_value=1,
-    value=0.0001,  # Default value to start with, you can change this as needed
-    step=0.00001,
-    format="%.5f%%",  # Formatting to show the values as percentages with five decimal places
-)
-
-char_price = st.slider(
-    "Select an Eth Carbon Offset Pledge % of the entire network:",
-    min_value=100,
-    max_value=1000,
-    value=158,
-    step=1,
-)
-
-
-# Check if there is data to display, and show it
-if not filtered_data.empty:
-    st.write(filtered_data)
-    st.write(filtered_data["Monthly Emissions"].iloc[0])
-else:
-    st.write("No data available for the selected month and year.")
-
 
 # Live price NOT WORKING GRRR
 # from web3 import Web3
