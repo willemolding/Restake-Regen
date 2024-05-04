@@ -6,6 +6,9 @@ import "forge-std/Test.sol";
 
 import {Deployer_M2} from "@eigenlayer-scripts/deploy/devnet/M2_Deploy_From_Scratch.s.sol";
 
-contract DeployPreconf is Deployer_M2 {
-
+contract DeployPreconf is Script {
+    function run() public {
+        Deployer_M2 deployer = new Deployer_M2();
+        deployer.run("M2_deployment.config.json");
+   }
 }
