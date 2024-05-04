@@ -22,6 +22,8 @@ import {RegenServiceManager} from "../src/RegenServiceManager.sol";
 import {RegenPledgeRegistry} from "../src/RegenPledgeRegistry.sol";
 import {RegenChallengeManager} from "../src/RegenChallengeManager.sol";
 
+import {IWorldID} from "../src/interfaces/IWorldID.sol";
+
 import "../src/ERC20Mock.sol";
 
 import {Utils} from "./utils/Utils.sol";
@@ -37,7 +39,9 @@ import "./DeployHelpers.s.sol";
 // # To deploy and verify our contract
 contract DeployL1 is ScaffoldETHDeploy {
     address constant L1_CCIP_ROUTER = 0x0BF3dE8c5D3e8A2B34D2BEeB17ABfCeBaf363A59;
-
+    address constant WORLD_ID_ROUTER = 0x469449f251692E0779667583026b5A1E99512157;
+    string constant appId = "app_staging_64d94c0a4c6d65f0a63e059939e58887";
+    string constant actionId = "register-for-restakeregen";
     // ERC20 and Strategy: we need to deploy this erc20, create a strategy for it, and whitelist this strategy in the strategymanager
 
     ERC20Mock public erc20Mock;
@@ -65,7 +69,7 @@ contract DeployL1 is ScaffoldETHDeploy {
 
     function _deployRestakeRegenContracts() internal {
 
-        RegenPledgeRegistry regenPledgeRegistry = new RegenPledgeRegistry();
+        RegenPledgeRegistry regenPledgeRegistry = new RegenPledgeRegistry(IWorldID(WORLD_ID_ROUTER), appId, actionId);
         deployments.push(ScaffoldETHDeploy.Deployment("RegenPledgeRegistry", address(regenPledgeRegistry)));
 
         RegenChallengeManager regenChallengeManager = new RegenChallengeManager(L1_CCIP_ROUTER, regenPledgeRegistry);

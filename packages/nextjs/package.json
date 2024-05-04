@@ -14,11 +14,15 @@
     "vercel:yolo": "vercel --build-env NEXT_PUBLIC_IGNORE_BUILD_ERROR=true"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@heroicons/react": "~2.0.11",
+    "@mui/material": "^5.15.16",
     "@rainbow-me/rainbowkit": "~2.0.2",
     "@tanstack/react-query": "~5.28.6",
     "@uniswap/sdk-core": "~4.0.1",
     "@uniswap/v2-sdk": "~3.0.1",
+    "@worldcoin/idkit": "^1.2.0",
     "blo": "~1.0.1",
     "burner-connector": "^0.0.3",
     "daisyui": "4.5.0",
