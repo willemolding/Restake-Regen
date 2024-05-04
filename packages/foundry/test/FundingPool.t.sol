@@ -6,6 +6,7 @@ import "forge-std/console.sol";
 import "../src/FundingPool.sol";
 import "../src/RegenChallengeManager.sol";
 import "../src/RegenPledgeRegistry.sol";
+import "../src/interfaces/IWorldID.sol";
 
 import {CCIPLocalSimulatorFork} from "@chainlink/local/src/ccip/CCIPLocalSimulatorFork.sol";
 
@@ -27,6 +28,10 @@ contract ContributeTest is Test {
     address constant L1_CCIP_ROUTER = 0x0BF3dE8c5D3e8A2B34D2BEeB17ABfCeBaf363A59;
     address constant BASE_CCIP_ROUTER = 0xD3b06cEbF099CE7DA4AcCf578aaebFDBd6e88a93;
     uint64 constant L1_CHAIN_SELECTOR = 16015286601757825753;
+
+    address constant WORLD_ID_ROUTER = 0x469449f251692E0779667583026b5A1E99512157;
+    string appId = "app_staging_64d94c0a4c6d65f0a63e059939e58887";
+    string actionId = "register-for-restakeregen";
 
     function setUp() public {
         string memory BASE_SEPOLIA_RPC_URL = vm.envString("BASE_SEPOLIA_RPC_URL");
@@ -67,7 +72,7 @@ contract ContributeTest is Test {
         vm.selectFork(sepoliaFork);
         assertEq(vm.activeFork(), sepoliaFork);
 
-        RegenPledgeRegistry pledgeRegistry = new RegenPledgeRegistry();
+        RegenPledgeRegistry pledgeRegistry = new RegenPledgeRegistry(IWorldID(WORLD_ID_ROUTER), appId, actionId);
         RegenChallengeManager RegenchallengeManager = new RegenChallengeManager(L1_CCIP_ROUTER, pledgeRegistry);
 
         vm.selectFork(baseSepoliaFork);

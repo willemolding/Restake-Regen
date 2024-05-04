@@ -7,8 +7,29 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   11155111: {
     RegenPledgeRegistry: {
-      address: "0xa30b82634ba0146cf39a2fcfb735fa7eec29c761",
+      address: "0xeb5b8c5699669a1645f94b921a9fcb81c32406ec",
       abi: [
+        {
+          type: "constructor",
+          inputs: [
+            {
+              name: "_worldId",
+              type: "address",
+              internalType: "contract IWorldID",
+            },
+            {
+              name: "_appId",
+              type: "string",
+              internalType: "string",
+            },
+            {
+              name: "_actionId",
+              type: "string",
+              internalType: "string",
+            },
+          ],
+          stateMutability: "nonpayable",
+        },
         {
           type: "function",
           name: "makePledge",
@@ -22,6 +43,21 @@ const deployedContracts = {
               name: "amount",
               type: "uint256",
               internalType: "uint256",
+            },
+            {
+              name: "root",
+              type: "uint256",
+              internalType: "uint256",
+            },
+            {
+              name: "nullifierHash",
+              type: "uint256",
+              internalType: "uint256",
+            },
+            {
+              name: "proof",
+              type: "uint256[8]",
+              internalType: "uint256[8]",
             },
           ],
           outputs: [],
@@ -46,11 +82,30 @@ const deployedContracts = {
           ],
           stateMutability: "view",
         },
+        {
+          type: "function",
+          name: "usedNullifiers",
+          inputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "",
+              type: "bool",
+              internalType: "bool",
+            },
+          ],
+          stateMutability: "view",
+        },
       ],
       inheritedFunctions: {},
     },
     RegenChallengeManager: {
-      address: "0x1fbb0ebed00f170f2eb3861dbc53ca1afa959f0d",
+      address: "0x06034797b945590e038928249f2ac805c4f43d78",
       abi: [
         {
           type: "constructor",
@@ -206,7 +261,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     RegenServiceManager: {
-      address: "0xa261073c95e9810a5001e3f5eaf8e8dd8374ae74",
+      address: "0x9da3e866c6b9ede493a209069575ab8b6c4fc549",
       abi: [
         {
           type: "constructor",
