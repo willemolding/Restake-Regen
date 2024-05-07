@@ -1,6 +1,6 @@
 # <img src="assets/noun_art/head-earth_noun_logo.ico" alt="Noun Earth" style="width: 70px; height: 70px; vertical-align: middle;"> Restake//Regen
 
-Check out the [validator dashboard](https://restake-regen-validator-dashboard.streamlit.app/)
+Check out the [validator dashboard](https://restake-regen-validator-dashboard.streamlit.app/) or our [pitchdeck](https://hackmd.io/@1WVt-H59QRO1kJG6lkNztQ/Byinw8GfR#/).
 
 ![emissions_per_validator](assets/cover_art.png?raw=true)
 
